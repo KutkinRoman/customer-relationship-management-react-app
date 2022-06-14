@@ -7,16 +7,19 @@ import DayItem from "../../UI/calendar/DayItem";
 import DaySkeleton from "../../UI/calendar/DaySkeleton";
 import {AppTextField} from "../../UI/form/AppTextField";
 import AppFormAction from "../../UI/form/AppFormAction";
-import {MenuItem} from "@mui/material";
+import {Box, MenuItem} from "@mui/material";
 import {CoachingContext} from "../../../context/CoachingContext";
 import {observer} from "mobx-react-lite";
 import {CoachingTimeTableContext} from "../../../context/CoachingTimeTableContext";
+import CoachingSessionsModal from "./CoachingSessionsModal";
+import useModal from "../../../hooks/useModal";
 
 interface CoachingDayItemProps {
-    day: dayjs.Dayjs
+    day: dayjs.Dayjs,
+    handleOnClick: (day: dayjs.Dayjs, sessions?: ICoachingSession[]) => void
 }
 
-const CoachingDayItem: FC<CoachingDayItemProps> = observer(({day}) => {
+const CoachingDayItem: FC<CoachingDayItemProps> = observer(({day, handleOnClick}) => {
 
     const coachingDirectionStore = useContext(CoachingContext)
     const coachingTimeTableStore = useContext(CoachingTimeTableContext)
@@ -43,7 +46,10 @@ const CoachingDayItem: FC<CoachingDayItemProps> = observer(({day}) => {
 
 
     return (
-        <React.Fragment>
+        <Box
+            onClick={() => handleOnClick(day, sessions)}
+            height={'100%'}
+        >
             {isLoading &&
                 <DaySkeleton/>
             }
@@ -71,7 +77,7 @@ const CoachingDayItem: FC<CoachingDayItemProps> = observer(({day}) => {
                     )
                 }
             )}
-        </React.Fragment>
+        </Box>
     )
 })
 
@@ -112,18 +118,35 @@ const CoachingSideBar: FC = observer(() => {
 
 const CoachingTimeTable: FC = observer(() => {
 
+    const sessionsModal = useModal()
+    const coachingTimeTableStore = useContext(CoachingTimeTableContext)
+
+    const handleOnClickDay = (day: dayjs.Dayjs, sessions?: ICoachingSession[]) => {
+        coachingTimeTableStore?.setCurrentDay(day)
+        coachingTimeTableStore?.setSessions(sessions)
+        sessionsModal.handleOpen()
+    }
+
     return (
-        <Calendar
-            title={'Расписание тренировок'}
-            renderSideBar={() =>
-                <CoachingSideBar/>
-            }
-            renderDayContent={day =>
-                <CoachingDayItem
-                    day={day}
-                />
-            }
-        />
+        <React.Fragment>
+            <Calendar
+                title={'Расписание тренировок'}
+                renderSideBar={() =>
+                    <CoachingSideBar/>
+                }
+                renderDayContent={day =>
+                    <CoachingDayItem
+                        day={day}
+                        handleOnClick={handleOnClickDay}
+                    />
+                }
+            />
+            <CoachingSessionsModal
+                store={coachingTimeTableStore}
+                isOpen={sessionsModal.isOpen}
+                handleClose={sessionsModal.handleClose}
+            />
+        </React.Fragment>
     );
 });
 

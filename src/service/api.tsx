@@ -1,14 +1,12 @@
 import axios from 'axios';
 import {authStore} from "../index";
 
-const baseURL = 'https://spartak-fitnes.herokuapp.com/'
-
 export const API = axios.create({
-    baseURL: baseURL
+    baseURL: process.env.REACT_APP_API_URI
 })
 
 export const AUTH_API = axios.create({
-    baseURL: baseURL
+    baseURL: process.env.REACT_APP_API_URI
 })
 
 AUTH_API.interceptors.request.use((config) => {

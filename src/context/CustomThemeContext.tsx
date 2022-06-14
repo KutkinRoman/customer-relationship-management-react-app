@@ -12,8 +12,11 @@ const customTheme = new CustomTheme(new CustomDarkPalette())
 
 const CustomThemeContextProvider: FC<CustomThemeContextProviderProps> = ({children}) => {
     return (
-        <CustomThemeContext.Provider value={customTheme}>
-            <ThemeProvider theme={customTheme.theme}>
+        <CustomThemeContext.Provider
+            value={customTheme}>
+            <ThemeProvider
+                theme={customTheme.theme}
+            >
                 {children}
             </ThemeProvider>
         </CustomThemeContext.Provider>

@@ -7,7 +7,8 @@ interface DayItemProps {
     time?: string
     title?: string
     description?: string
-    children?: React.ReactNode
+    children?: React.ReactNode,
+    onClick?: () => void
 }
 
 const DayItem: FC<DayItemProps> =

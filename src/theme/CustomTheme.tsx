@@ -46,14 +46,14 @@ class CustomTheme implements ICustomTheme {
                     },
 
                     secondary: {
-                        light: ColorUtils.lighterColor(this.palette.secondaryColor, 0.05),
+                        light: ColorUtils.transparentRGBA(ColorUtils.lighterColor(this.palette.secondaryColor, 0.05), 0.98),
                         main: this.palette.secondaryColor,
                         dark: ColorUtils.darkerColor(this.palette.secondaryColor, 0.05),
                         contrastText: this.palette.textColor,
                     },
 
                     primary: {
-                        light: ColorUtils.lighterColor(this.palette.primaryColor, 0.05),
+                        light: ColorUtils.transparentRGBA(ColorUtils.lighterColor(this.palette.primaryColor, 0.05), 0.98),
                         main: this.palette.primaryColor,
                         dark: ColorUtils.darkerColor(this.palette.primaryColor, 0.05),
                         contrastText: this.palette.textColor,
@@ -75,7 +75,7 @@ class CustomTheme implements ICustomTheme {
 
                     background: {
                         default: this.palette.backgroundColor,
-                        paper: ColorUtils.transparentRGBA(this.palette.backgroundColor, 0.97)
+                        paper: ColorUtils.transparentRGBA(this.palette.backgroundColor, 0.93)
                     },
 
                     divider: ColorUtils.transparentRGBA(this.palette.textColor, 0.12),

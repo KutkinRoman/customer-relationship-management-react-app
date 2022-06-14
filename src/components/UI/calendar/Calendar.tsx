@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useContext} from 'react';
 import CalendarHeader from "./CalendarHeader";
 import Sidebar from "./Sidebar";
 import Month from "./Month";
@@ -6,7 +6,7 @@ import classes from './index.module.css'
 import {useCalendar} from "../../../hooks/useCalendar";
 import {Box, ThemeProvider} from "@mui/material";
 import dayjs from "dayjs";
-import {useMode} from "../../../hooks/useMode";
+import {CalendarThemeContext} from "../../../context/CalendarThemeContext";
 
 interface CalendarProps {
     title?: string
@@ -35,7 +35,7 @@ const Calendar: FC<CalendarProps> = ({title, renderSideBar, renderDayContent}) =
         mode,
         theme,
         changeMode
-    } = useMode('calendarMode')
+    } = useContext(CalendarThemeContext)
 
     return (
         <ThemeProvider

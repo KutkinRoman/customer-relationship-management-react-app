@@ -24,7 +24,7 @@ class CustomDarkPalette implements ICustomPalette {
         // this.textColor = 'rgba(236,236,236,0.7)'
         // this.backgroundColor = 'rgb(45,3,51)'
         // this.shadowsColor = 'rgb(207,0,255)'
-        // this.navBarColor = 'rgb(237,160,250)'
+        // this.navBarColor = 'rgb(198,146,201)'
 
         this.primaryColor = 'rgba(16, 16, 16, 1)'
         this.secondaryColor = 'rgb(54,135,208)'

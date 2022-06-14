@@ -31,10 +31,10 @@ const publicNavItems: IAppNavItem[] = [
 ]
 
 const CRMNavItems: IAppNavItem[] = [
-    new AppNavItem('Клиент', null, '', null),
-    new AppNavItem('Касса', null, AppPaths.cash, null),
-    new AppNavItem('Тренер', null, AppPaths.coach, null),
-    new AppNavItem('Товары', null, AppPaths.products, null),
+    // new AppNavItem('Клиент', null, '', null),
+    // new AppNavItem('Касса', null, AppPaths.cash, null),
+    // new AppNavItem('Тренер', null, AppPaths.coach, null),
+    // new AppNavItem('Товары', null, AppPaths.products, null),
     new AppNavItem('Заявки', null, AppPaths.customerRequests, [
             new AppNavItem('Список заявок', null, AppPaths.customerRequests, null),
             new AppNavItem('Новая заявка', null, AppPaths.newCustomerRequests, null)
@@ -44,10 +44,7 @@ const CRMNavItems: IAppNavItem[] = [
             new AppNavItem('График тренировок', null, AppPaths.coachingTimeTable, null),
         ]
     ),
-    new AppNavItem('Бот', null, AppPaths.customerRequests, [
-            new AppNavItem('Беседы', null, AppPaths.conversations, null),
-        ]
-    )
+    new AppNavItem('Беседы', null, AppPaths.conversations, null),
 ]
 
 export {
