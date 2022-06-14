@@ -6,6 +6,7 @@ import {AppTextFieldProps} from "./AppTextField";
 import {FieldErrors} from "react-hook-form/dist/types/errors";
 
 interface AppTextFieldControllerProps extends AppTextFieldProps {
+    autoComplete?: boolean
     id?: string
     name: string
     control: Control
@@ -16,6 +17,7 @@ interface AppTextFieldControllerProps extends AppTextFieldProps {
 const AppTextFieldController: FC<AppTextFieldControllerProps> =
     ({
          id,
+         autoComplete,
          name,
          control,
          errors,
@@ -48,7 +50,7 @@ const AppTextFieldController: FC<AppTextFieldControllerProps> =
                         helperText={errors && errors[name] ? errors[name].message || `${label} Error!` : ''}
                         multiline={!!rows}
                         rows={rows || 1}
-                        autoComplete={'new-password'}
+                        autoComplete={autoComplete ? 'new-password' : ''}
                     >
                         {(select && options && renderOption) &&
                             options.map(option =>

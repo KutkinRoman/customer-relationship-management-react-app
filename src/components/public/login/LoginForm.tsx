@@ -40,7 +40,8 @@ const LoginForm: FC = () => {
             <AppDivider/>
             <AppFormItem>
                 <AppTextFieldController
-                    id={'login'}
+                    id={'username'}
+                    autoComplete={true}
                     label={'Имя пользователя'}
                     name={'username'}
                     control={loginForm.control}
@@ -50,6 +51,7 @@ const LoginForm: FC = () => {
             <AppFormItem>
                 <AppTextFieldController
                     id={'password'}
+                    autoComplete={true}
                     label={'Пароль'}
                     name={'password'}
                     type={'password'}
