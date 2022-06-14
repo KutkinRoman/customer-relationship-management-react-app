@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {authStore} from "../index";
 
-const baseURL = 'http://178.21.8.143:5000'
+const baseURL = 'https://spartak-fitnes.herokuapp.com/'
 
 export const API = axios.create({
     baseURL: baseURL
