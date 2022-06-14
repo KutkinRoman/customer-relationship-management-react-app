@@ -25,12 +25,12 @@ const AppQuestionDialog: FC<AppQuestionDialogProps> =
 
 
         function negative() {
-            handleSuccess()
+            handleNegative()
             handleClose()
         }
 
         function success() {
-            handleNegative()
+            handleSuccess()
             handleClose()
         }
 

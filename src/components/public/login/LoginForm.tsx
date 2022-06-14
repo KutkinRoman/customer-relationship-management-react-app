@@ -1,4 +1,4 @@
-import React, {FC, useContext, useEffect} from 'react';
+import React, {FC, useContext} from 'react';
 import {useForm} from "react-hook-form";
 import {Valid} from "../../../utils/ValidationUtils";
 import AppFormItem from "../../UI/form/AppFormItem";
@@ -40,6 +40,7 @@ const LoginForm: FC = () => {
             <AppDivider/>
             <AppFormItem>
                 <AppTextFieldController
+                    id={'email'}
                     label={'Имя пользователя'}
                     name={'username'}
                     control={loginForm.control}
@@ -48,6 +49,7 @@ const LoginForm: FC = () => {
             </AppFormItem>
             <AppFormItem>
                 <AppTextFieldController
+                    id={'password'}
                     label={'Пароль'}
                     name={'password'}
                     type={'password'}

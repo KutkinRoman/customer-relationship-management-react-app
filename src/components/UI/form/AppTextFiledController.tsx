@@ -6,6 +6,7 @@ import {AppTextFieldProps} from "./AppTextField";
 import {FieldErrors} from "react-hook-form/dist/types/errors";
 
 interface AppTextFieldControllerProps extends AppTextFieldProps {
+    id?: string
     name: string
     control: Control
     errors?: FieldErrors
@@ -14,6 +15,7 @@ interface AppTextFieldControllerProps extends AppTextFieldProps {
 
 const AppTextFieldController: FC<AppTextFieldControllerProps> =
     ({
+         id,
          name,
          control,
          errors,
@@ -33,7 +35,7 @@ const AppTextFieldController: FC<AppTextFieldControllerProps> =
                 control={control}
                 render={({field: {onChange, value}}) =>
                     <TextField
-                        id={name}
+                        id={id || `id${Math.random()}`}
                         select={select || false}
                         fullWidth={fullWidth || true}
                         type={type || 'text'}
