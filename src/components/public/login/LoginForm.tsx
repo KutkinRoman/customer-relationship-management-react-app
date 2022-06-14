@@ -16,7 +16,7 @@ const LoginForm: FC = () => {
     const {handleResponseError} = useErrorHandler()
     const [isLoading, setIsLoading] = useState(false)
     const authStore = useContext(AuthContext)
-    const loginForm = useForm({mode: 'onBlur'})
+    const loginForm = useForm({mode: 'all'})
 
     Valid.requiredMinMaxLength(loginForm.register, 'username', 2, 30)
     Valid.requiredMinMaxLength(loginForm.register, 'password', 2, 30)
@@ -66,7 +66,6 @@ const LoginForm: FC = () => {
             <AppFormAction>
                 <AppLoadingButton
                     submit={true}
-                    disabled={!loginForm.formState.isValid || !loginForm.formState.isDirty}
                     loading={isLoading}
                 >
                     ВОЙТИ
