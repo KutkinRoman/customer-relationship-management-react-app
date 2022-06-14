@@ -15,7 +15,7 @@ const LoginForm: FC = () => {
 
     const {handleResponseError} = useErrorHandler()
     const authStore = useContext(AuthContext)
-    const loginForm = useForm({mode: 'onChange'})
+    const loginForm = useForm({mode: 'all'})
 
     Valid.requiredMinMaxLength(loginForm.register, 'username', 2, 30)
     Valid.requiredMinMaxLength(loginForm.register, 'password', 2, 30)
