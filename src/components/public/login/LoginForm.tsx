@@ -40,7 +40,7 @@ const LoginForm: FC = () => {
             <AppDivider/>
             <AppFormItem>
                 <AppTextFieldController
-                    id={'email'}
+                    id={'login'}
                     label={'Имя пользователя'}
                     name={'username'}
                     control={loginForm.control}
