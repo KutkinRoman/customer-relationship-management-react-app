@@ -62,7 +62,7 @@ const LoginForm: FC = () => {
                     submit={true}
                     disabled={!loginForm.formState.isValid || !loginForm.formState.isDirty}
                 >
-                    Сохранить
+                    ВОЙТИ
                 </AppButton>
             </AppFormAction>
         </form>
