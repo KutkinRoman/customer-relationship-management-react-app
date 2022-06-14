@@ -30,7 +30,7 @@ const NavBarItem: FC<NavBarItemProps> =
                                 <Button
                                     {...bindTrigger(popupState)}
                                     size={'large'}
-                                    endIcon={<KeyboardArrowDownIcon/>}
+                                    // endIcon={<KeyboardArrowDownIcon/>}
                                 >
                                     {item.title}
                                 </Button>
