@@ -50,7 +50,7 @@ const AppTextFieldController: FC<AppTextFieldControllerProps> =
                         helperText={errors && errors[name] ? errors[name].message || `${label} Error!` : ''}
                         multiline={!!rows}
                         rows={rows || 1}
-                        autoComplete={autoComplete ? 'new-password' : ''}
+                        autoComplete={autoComplete ? '' : 'new-password'}
                     >
                         {(select && options && renderOption) &&
                             options.map(option =>

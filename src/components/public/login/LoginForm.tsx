@@ -1,21 +1,22 @@
-import React, {FC, useContext} from 'react';
+import React, {FC, useContext, useState} from 'react';
 import {useForm} from "react-hook-form";
 import {Valid} from "../../../utils/ValidationUtils";
 import AppFormItem from "../../UI/form/AppFormItem";
 import AppTextFieldController from "../../UI/form/AppTextFiledController";
 import AppFormHeader from "../../UI/form/AppFormHeader";
 import AppFormAction from "../../UI/form/AppFormAction";
-import AppButton from "../../UI/button/AppButton";
 import AppDivider from "../../UI/divider/AppDivider";
 import {AuthContext} from "../../../context/AuthContext";
 import {useErrorHandler} from "../../../hooks/useErrorHandler";
 import {AuthService} from "../../../service/AuthService";
+import AppLoadingButton from "../../UI/button/AppLoadingButton";
 
 const LoginForm: FC = () => {
 
     const {handleResponseError} = useErrorHandler()
+    const [isLoading, seIsloading] = useState(false)
     const authStore = useContext(AuthContext)
-    const loginForm = useForm({mode: 'all'})
+    const loginForm = useForm({mode: 'onBlur'})
 
     Valid.requiredMinMaxLength(loginForm.register, 'username', 2, 30)
     Valid.requiredMinMaxLength(loginForm.register, 'password', 2, 30)
@@ -60,12 +61,13 @@ const LoginForm: FC = () => {
                 />
             </AppFormItem>
             <AppFormAction>
-                <AppButton
+                <AppLoadingButton
                     submit={true}
                     disabled={!loginForm.formState.isValid || !loginForm.formState.isDirty}
+                    loading={isLoading}
                 >
                     ВОЙТИ
-                </AppButton>
+                </AppLoadingButton>
             </AppFormAction>
         </form>
     );
