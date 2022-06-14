@@ -14,7 +14,7 @@ import AppLoadingButton from "../../UI/button/AppLoadingButton";
 const LoginForm: FC = () => {
 
     const {handleResponseError} = useErrorHandler()
-    const [isLoading, seIsloading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const authStore = useContext(AuthContext)
     const loginForm = useForm({mode: 'onBlur'})
 
@@ -22,12 +22,15 @@ const LoginForm: FC = () => {
     Valid.requiredMinMaxLength(loginForm.register, 'password', 2, 30)
 
     const handleLogin = async (data: any) => {
+        setIsLoading(true)
         try {
             const response = await AuthService.login(data)
             authStore?.handleAuthResponse(response.data)
         } catch (e) {
             // @ts-ignore
             handleResponseError(e.response.data, loginForm.setError)
+        } finally {
+            setIsLoading(false)
         }
     }
 
