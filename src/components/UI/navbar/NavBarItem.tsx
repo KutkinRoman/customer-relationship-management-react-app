@@ -29,7 +29,7 @@ const NavBarItem: FC<NavBarItemProps> =
                             <React.Fragment>
                                 <Button
                                     {...bindTrigger(popupState)}
-                                    size={'large'}
+                                    size={'small'}
                                     // endIcon={<KeyboardArrowDownIcon/>}
                                 >
                                     {item.title}
