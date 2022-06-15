@@ -82,7 +82,6 @@ const CustomerRequestFilter: FC<CustomerRequestFilterProps> = observer(
                                     checked={event.isChecked}
                                     onChange={(e, checked) => handleChange(event, checked)}
                                     inputProps={{'aria-label': 'controlled'}}
-                                    color={'secondary'}
                                 />
                             }
 
@@ -103,7 +102,6 @@ const CustomerRequestFilter: FC<CustomerRequestFilterProps> = observer(
                                 checked={filter.isCheckedAll}
                                 onChange={(e, checked) => filter.setIsCheckedAll(checked)}
                                 inputProps={{'aria-label': 'controlled'}}
-                                color={'secondary'}
                             />
                         }
 

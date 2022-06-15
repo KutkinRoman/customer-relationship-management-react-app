@@ -1,11 +1,12 @@
 import React, {FC, useContext} from 'react';
-import {AppBar, Box, Container, Fade, Slide, Toolbar, useScrollTrigger} from "@mui/material";
+import {Box, Container, Slide, Toolbar, useScrollTrigger} from "@mui/material";
 import NavBarItem from "./NavBarItem";
 import {useNavigate} from 'react-router-dom'
 import {IAppNavItem} from "../../../router/AppNavItem";
 import LogoutIcon from '@mui/icons-material/Logout';
 import AppIconButton from "../button/AppIconButton";
 import {AuthContext} from "../../../context/AuthContext";
+import {AppBarStyled} from "./styles";
 
 interface NavBarProps {
     items: IAppNavItem[]
@@ -17,7 +18,7 @@ interface Props {
 }
 
 function HideOnScroll(props: Props) {
-    const { children, window } = props;
+    const {children, window} = props;
     const trigger = useScrollTrigger({
         target: window ? window() : undefined,
     });
@@ -40,9 +41,7 @@ const NavBar: FC<NavBarProps> = ({items}) => {
 
     return (
         <HideOnScroll>
-            <AppBar
-                sx={{backgroundColor: 'navbar'}}
-            >
+            <AppBarStyled>
                 <Container
                     maxWidth={'xl'}
                 >
@@ -60,7 +59,6 @@ const NavBar: FC<NavBarProps> = ({items}) => {
                         >
                             {authStore?.isAuth &&
                                 <AppIconButton
-                                    color={'primary'}
                                     onClick={() => authStore.logout()}
                                 >
                                     <LogoutIcon/>
@@ -69,7 +67,7 @@ const NavBar: FC<NavBarProps> = ({items}) => {
                         </Box>
                     </Toolbar>
                 </Container>
-            </AppBar>
+            </AppBarStyled>
         </HideOnScroll>
     );
 };

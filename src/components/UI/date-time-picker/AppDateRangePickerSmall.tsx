@@ -35,7 +35,7 @@ const AppDateRangePickerSmall: FC<AppDateRangePickerSmallProps> =
                             </Typography>
                             <TextField
                                 {...startProps}
-                                color={'secondary'}
+                                color={'primary'}
                                 type={'date'}
                                 variant={'standard'}
                                 InputProps={{
@@ -49,7 +49,7 @@ const AppDateRangePickerSmall: FC<AppDateRangePickerSmallProps> =
                             />
                             <TextField
                                 {...endProps}
-                                color={'secondary'}
+                                color={'primary'}
                                 type={'date'}
                                 variant={'standard'}
                                 InputProps={{

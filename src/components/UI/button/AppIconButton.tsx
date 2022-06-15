@@ -1,7 +1,8 @@
 import React, {FC, MouseEventHandler} from 'react';
 import {OverridableStringUnion} from "@mui/types";
-import {IconButton, IconButtonPropsColorOverrides, Tooltip} from "@mui/material";
+import {IconButton, IconButtonPropsColorOverrides, Theme, Tooltip} from "@mui/material";
 import {IconButtonPropsSizeOverrides} from "@mui/material/IconButton/IconButton";
+import {SxProps} from "@mui/system";
 
 interface AppIconButtonProps {
     size?: OverridableStringUnion<'small' | 'medium' | 'large', IconButtonPropsSizeOverrides>
@@ -13,6 +14,7 @@ interface AppIconButtonProps {
     children?: React.ReactNode | string | null,
     disabled?: boolean
     submit?: boolean
+    sx?: SxProps<Theme>
 }
 
 const AppIconButton: FC<AppIconButtonProps> =
@@ -24,12 +26,14 @@ const AppIconButton: FC<AppIconButtonProps> =
          children,
          disabled,
          submit,
+         sx,
      }) => {
         return (
             <Tooltip title={tooltipTitle || ''}>
                 <IconButton
+                    sx={sx}
                     size={size}
-                    color={color}
+                    color={color || 'primary'}
                     disabled={disabled || false}
                     onClick={onClick}
                     type={submit ? 'submit' : undefined}

@@ -17,8 +17,22 @@ const CustomerRequestsPage: FC = observer(() => {
     const customerRequestModal = useModal()
 
     const handleChangePage = (event: React.ChangeEvent<unknown>, page: number) => {
+        jumpUp()
         customerRequestStore.filter.setPage(page)
         customerRequestStore.fetch()
+    }
+
+    const handleOnClickFilter = () => {
+        jumpUp()
+        customerRequestStore.fetchFilter()
+    }
+
+    const handleOnClickResetFilter = () => {
+        jumpUp()
+        customerRequestStore.reset()
+    }
+
+    const jumpUp = () => {
         const element = document.getElementById('AppWrapper')
         if (element) {
             element.scrollIntoView({behavior: 'smooth', block: 'start'})
@@ -52,8 +66,8 @@ const CustomerRequestsPage: FC = observer(() => {
                     >
                         <CustomerRequestFilter
                             filter={customerRequestStore.filter}
-                            fetchFilter={() => customerRequestStore.fetchFilter()}
-                            reset={() => customerRequestStore.reset()}
+                            fetchFilter={() => handleOnClickFilter()}
+                            reset={() => handleOnClickResetFilter()}
                         />
                     </PageContentItem>
                 </Box>
@@ -69,9 +83,9 @@ const CustomerRequestsPage: FC = observer(() => {
                         <Pagination
                             page={customerRequestStore.filter.page}
                             count={customerRequestStore.data?.totalPages}
-                            color={'secondary'}
                             onChange={handleChangePage}
                             size={'large'}
+                            color={'primary'}
                         />
                     </Box>
                     <PageContentItem
@@ -92,9 +106,9 @@ const CustomerRequestsPage: FC = observer(() => {
                         <Pagination
                             page={customerRequestStore.filter.page}
                             count={customerRequestStore.data?.totalPages}
-                            color={'secondary'}
                             onChange={handleChangePage}
                             size={'large'}
+                            color={'primary'}
                         />
                     </Box>
                 </Box>

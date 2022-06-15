@@ -35,6 +35,7 @@ const ConversationForm: FC<ConversationFormProps> = observer(
                     sx={{marginTop: '10px'}}
                 >
                     <AppButton
+                        variant={'text'}
                         onClick={() => store.createNewMessage()}
                     >
                         Добавить новое сообщение

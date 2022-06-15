@@ -69,14 +69,12 @@ const ConversationMessageItem: FC<ConversationMessageItemProps> = observer(
                             >
                                 <AppIconButton
                                     disabled={rows <= minRowsTextField}
-                                    color={'secondary'}
                                     onClick={handleDicRows}
                                 >
                                     <ArrowDropUpIcon/>
                                 </AppIconButton>
                                 <AppIconButton
                                     disabled={rows >= maxRowsTextField}
-                                    color={'secondary'}
                                     onClick={handleIncRows}
                                 >
                                     <ArrowDropDownIcon/>
@@ -161,6 +159,7 @@ const ConversationMessageItem: FC<ConversationMessageItemProps> = observer(
                     {message.coachingDirectionId &&
                         <AppFormAction>
                             <AppButton
+                                variant={'text'}
                                 onClick={() => handleOpenTimeTable(message)}
                             >
                                 Открыть расписание
@@ -176,7 +175,7 @@ const ConversationMessageItem: FC<ConversationMessageItemProps> = observer(
                     >
                         <Typography
                             variant={'subtitle2'}
-                            color={message?.isOutMessage ? 'success.main' : 'error.main'}
+                            color={message?.isOutMessage ? 'secondary.main' : 'error.main'}
                         >
                             Сообщение{message?.isOutMessage ? ' ' : ' не '}отправляется
                         </Typography>
@@ -194,7 +193,6 @@ const ConversationMessageItem: FC<ConversationMessageItemProps> = observer(
                                         <React.Fragment>
                                             <AppIconButton
                                                 tooltipTitle={'Удалить'}
-                                                color={'error'}
                                                 onClick={() => store.deleteMessage(message)}
                                             >
                                                 <DeleteForeverIcon/>
@@ -203,7 +201,6 @@ const ConversationMessageItem: FC<ConversationMessageItemProps> = observer(
                                                 ?
                                                 <AppIconButton
                                                     tooltipTitle={'Приостановить отправку сообщения'}
-                                                    color={'warning'}
                                                     onClick={() => store.updateStatus(message, EntityStatus.NOT_ACTIVE)}
                                                 >
                                                     <AppBlockingIcon/>
@@ -211,7 +208,6 @@ const ConversationMessageItem: FC<ConversationMessageItemProps> = observer(
                                                 :
                                                 <AppIconButton
                                                     tooltipTitle={'Возобновить отправку сообщения'}
-                                                    color={'success'}
                                                     onClick={() => store.updateStatus(message, EntityStatus.ACTIVE)}
                                                 >
                                                     <ConnectWithoutContactIcon/>

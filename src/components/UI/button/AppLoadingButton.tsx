@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {AppButtonProps} from "./AppButton";
-import {Box, CircularProgress, Tooltip} from "@mui/material";
+import {CircularProgress, Tooltip} from "@mui/material";
 import LoadingButton from '@mui/lab/LoadingButton';
 
 interface AppLoadingButtonProps extends AppButtonProps {
@@ -27,13 +27,13 @@ const AppLoadingButton: FC<AppLoadingButtonProps> =
                     loading={loading}
                     loadingIndicator={
                         <CircularProgress
-                            color={'secondary'}
+                            color={'primary'}
                             size={20}
                         />
                     }
                     fullWidth={fullWidth || true}
                     size={size}
-                    color={color}
+                    color={color || 'primary'}
                     sx={{borderRadius: borderRadius || '16px'}}
                     variant={variant || 'contained'}
                     onClick={onClick}

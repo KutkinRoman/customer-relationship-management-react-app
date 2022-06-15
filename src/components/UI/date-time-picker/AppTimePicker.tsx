@@ -52,7 +52,7 @@ const AppTimePicker: FC<AppTimePickerProps> =
                     <TextField
                         {...params}
                         fullWidth={fullWidth || true}
-                        color={color || 'secondary'}
+                        color={color || 'primary'}
                         variant={variant || 'standard'}
                     />
                 }

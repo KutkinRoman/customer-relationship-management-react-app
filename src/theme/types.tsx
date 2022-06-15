@@ -9,11 +9,11 @@ export interface ICustomPalette {
     mode: PaletteMode,
 
     primaryColor: string,
+    primaryContrastText: string,
     secondaryColor: string,
+    secondaryContrastText: string,
     textColor: string,
     backgroundColor: string,
-    lineColor: string,
-    navBarColor: string
     shadowsColor: string
 
     successColor: string,

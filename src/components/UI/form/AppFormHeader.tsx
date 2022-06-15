@@ -9,12 +9,12 @@ const AppFormHeader: FC<AppFormHeaderProps> = ({text}) => {
     return (
         <Box
             borderRadius={'16px'}
-            padding={'15px'}
-            margin={'15px'}
+            padding={'5px'}
+            margin={'5px'}
         >
             <Typography
                 variant={'h6'}
-                color={'secondary.main'}
+                color={'primary.main'}
             >
                 {text}
             </Typography>

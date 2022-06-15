@@ -38,7 +38,7 @@ const AppDatePickerController: FC<AppDatePickerControllerProps> =
                                 {...params}
                                 id={name}
                                 fullWidth={fullWidth || true}
-                                color={color || 'secondary'}
+                                color={color || 'primary'}
                                 variant={variant || 'standard'}
                                 error={!!errors[name]}
                                 helperText={errors[name] ? errors[name].message || `${label} Error!` : ''}

@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import {IAppNavItem} from "../../../router/AppNavItem";
 import {Box, Button} from "@mui/material";
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PopupState, {bindMenu, bindTrigger} from 'material-ui-popup-state';
@@ -29,7 +28,7 @@ const NavBarItem: FC<NavBarItemProps> =
                             <React.Fragment>
                                 <Button
                                     {...bindTrigger(popupState)}
-                                    sx={{minWidth: '100px'}}
+                                    sx={{minWidth: '100px', color: 'text.secondary'}}
                                     size={'large'}
                                     // endIcon={<KeyboardArrowDownIcon/>}
                                 >
@@ -54,7 +53,7 @@ const NavBarItem: FC<NavBarItemProps> =
                         )}
                     </PopupState>
                     : <Button
-                        sx={{minWidth: '100px'}}
+                        sx={{minWidth: '100px', color: 'text.secondary'}}
                         size={'large'}
                         onClick={() => handleOnClickItem(item)}
                     >

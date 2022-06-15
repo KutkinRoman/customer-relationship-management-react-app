@@ -48,7 +48,7 @@ const ConversationsPage = observer(() => {
             >
                 {conversationStore.isLoading &&
                     <LinearProgress
-                        color={'secondary'}
+                        color={'primary'}
                     />
                 }
                 <Grid

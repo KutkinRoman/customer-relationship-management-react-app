@@ -12,6 +12,7 @@ export const useMode = (nameLocalStorage: string) => {
     }
 
     const theme = useMemo(() => {
+
         return createTheme(
             {
                 palette: {

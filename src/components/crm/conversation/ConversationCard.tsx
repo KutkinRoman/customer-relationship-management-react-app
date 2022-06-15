@@ -1,12 +1,13 @@
 import React, {FC} from 'react';
 import {IConversation} from "../../../model/conversation/Conversation";
-import {CardContent, Typography} from "@mui/material";
-import Card from '@mui/material/Card';
+import {CardContent} from "@mui/material";
 import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
 import AppIconButton from "../../UI/button/AppIconButton";
 import EditIcon from '@mui/icons-material/Edit';
 import AppDivider from "../../UI/divider/AppDivider";
+import AppCard from "../../UI/page-content/AppCard";
+import {Caption, Heading, SubTitle} from "../../UI/typography/Typography";
 
 interface ConversationCardProps {
     conversation?: IConversation
@@ -19,7 +20,7 @@ const ConversationCard: FC<ConversationCardProps> =
          initFormByConversation
      }) => {
         return (
-            <Card
+            <AppCard
                 sx={{borderRadius: '16px'}}
             >
                 <CardHeader
@@ -37,53 +38,43 @@ const ConversationCard: FC<ConversationCardProps> =
                         (initFormByConversation && conversation)
                         &&
                         <AppIconButton
-                            color={'secondary'}
                             onClick={() => initFormByConversation(conversation)}
                         >
                             <EditIcon/>
                         </AppIconButton>
                     }
                     title={
-                        <Typography
-                            variant={'h6'}
-                            color={'secondary'}
-                        >
+                        <Heading>
                             {conversation?.conversationTitle || '?'}
-                        </Typography>
+                        </Heading>
                     }
-                    subheader={conversation?.groupTitle}
+                    subheader={
+                        <SubTitle>
+                            {conversation?.groupTitle}
+                        </SubTitle>
+                    }
                 />
                 <AppDivider/>
                 <CardContent>
-                    <Typography
-                        variant={'subtitle2'}
-                        color={'text.secondary'}
-                    >
+                    <SubTitle>
                         ID группы: {conversation?.groupId}
-                    </Typography>
-                    <Typography
-                        variant={'subtitle2'}
-                        color={'text.secondary'}
-                    >
+                    </SubTitle>
+                    <SubTitle>
                         ID беседы: {conversation?.peerId}
-                    </Typography>
-                    <Typography
-                        variant={'subtitle2'}
-                        color={'text.secondary'}
-                    >
+                    </SubTitle>
+                    <SubTitle>
                         Сообщения: {conversation?.messages.length}
-                    </Typography>
+                    </SubTitle>
                 </CardContent>
                 <AppDivider/>
                 <CardContent>
-                    <Typography
-                        variant={'subtitle2'}
-                        color={conversation?.isUnavailable ? 'success.main' : 'error.main'}
+                    <Caption
+                        color={conversation?.isUnavailable ? 'secondary.main' : 'error.main'}
                     >
                         Беседа{conversation?.isUnavailable ? ' доступна ' : ' недоступна '}для отправки сообщений
-                    </Typography>
+                    </Caption>
                 </CardContent>
-            </Card>
+            </AppCard>
         )
             ;
     };

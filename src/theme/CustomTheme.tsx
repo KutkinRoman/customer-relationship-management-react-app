@@ -46,17 +46,17 @@ class CustomTheme implements ICustomTheme {
                     },
 
                     secondary: {
-                        light: ColorUtils.transparentRGBA(ColorUtils.lighterColor(this.palette.secondaryColor, 0.05), 0.98),
+                        light: ColorUtils.transparentRGBA(ColorUtils.lighterColor(this.palette.secondaryColor, 0.2), 0.98),
                         main: this.palette.secondaryColor,
-                        dark: ColorUtils.darkerColor(this.palette.secondaryColor, 0.05),
-                        contrastText: this.palette.textColor,
+                        dark: ColorUtils.darkerColor(this.palette.secondaryColor, 0.2),
+                        contrastText: this.palette.secondaryContrastText,
                     },
 
                     primary: {
-                        light: ColorUtils.transparentRGBA(ColorUtils.lighterColor(this.palette.primaryColor, 0.05), 0.98),
+                        light: ColorUtils.transparentRGBA(ColorUtils.lighterColor(this.palette.primaryColor, 0.2), 0.98),
                         main: this.palette.primaryColor,
-                        dark: ColorUtils.darkerColor(this.palette.primaryColor, 0.05),
-                        contrastText: this.palette.textColor,
+                        dark: ColorUtils.darkerColor(this.palette.primaryColor, 0.2),
+                        contrastText: this.palette.primaryContrastText,
                     },
 
                     text: {
@@ -75,16 +75,25 @@ class CustomTheme implements ICustomTheme {
 
                     background: {
                         default: this.palette.backgroundColor,
-                        paper: ColorUtils.transparentRGBA(this.palette.backgroundColor, 0.93)
+                        paper: ColorUtils.transparentRGBA(this.palette.backgroundColor, 0.98),
+                        // @ts-ignore
+                        linearGradient: `linear-gradient(${ColorUtils.transparentRGBA(this.palette.backgroundColor, 0.5)} 0%, ${this.palette.backgroundColor} 75%)`
                     },
 
-                    divider: ColorUtils.transparentRGBA(this.palette.textColor, 0.12),
+                    divider: ColorUtils.transparentRGBA(this.palette.textColor, 0.05),
 
                     // @ts-ignore
-                    navbar: this.palette.navBarColor,
+                    navbar: {
+                        linearGradient: `linear-gradient(${ColorUtils.transparentRGBA(this.palette.backgroundColor, 0.6)} 0%, ${this.palette.backgroundColor} 75%)`
+                    },
+                    // @ts-ignore
+                    input: {
+                        container: ColorUtils.transparentRGBA(this.palette.secondaryColor, 0.08)
+                    }
+
                 },
 
-                shadows: this.shadows
+                // shadows: this.shadows
 
             }
         );

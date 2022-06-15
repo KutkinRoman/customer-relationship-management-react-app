@@ -1,10 +1,11 @@
 import React, {FC} from 'react';
 import {ICustomerRequest} from "../../../model/customer/CustomerRequest";
 import {AppTable} from "../../UI/table/AppTable";
-import TableRow from "@mui/material/TableRow";
 import {Link, TableCell, Typography} from "@mui/material";
 import {createColorByEvent} from "../../../model/customer/CustomerRequestEvent";
 import {DateTimeUtils} from "../../../utils/DateTimeUtils";
+import AppTableRow from "../../UI/table/AppTableRow";
+import {Body, Caption} from "../../UI/typography/Typography";
 
 interface CustomerRequestTableProps {
     requests: ICustomerRequest[]
@@ -34,34 +35,30 @@ const CustomerRequestTable: FC<CustomerRequestTableProps> =
                 isLoading={isLoading}
                 maxSkeletonRows={8}
                 renderRow={request =>
-                    <TableRow
+                    <AppTableRow
                         key={`customerRequestTable_${request.id}`}
                         hover
                         tabIndex={-1}
                         onClick={() => handleClickTableRow(request)}
                     >
                         <TableCell>
-                            {DateTimeUtils.toDDmmYYYYmmHH(request.createDateTime)}
+                            <Typography
+                                variant={'body2'}
+                            >
+                                {DateTimeUtils.toDDmmYYYYmmHH(request.createDateTime)}
+                            </Typography>
                         </TableCell>
                         <TableCell>
-                            <Typography
-                                variant={'body2'}
-                            >
+                            <Body>
                                 {request.person.lastName}
-                            </Typography>
-                            <Typography
-                                variant={'body2'}
-                            >
+                            </Body>
+                            <Body>
                                 {request.person.firstName}
-                            </Typography>
-                            <Typography
-                                variant={'body2'}
-                            >
+                            </Body>
+                            <Body>
                                 {request.person.info.telephone}
-                            </Typography>
-                            <Typography
-                                variant={'body2'}
-                            >
+                            </Body>
+                            <Caption>
                                 <Link
                                     component={'a'}
                                     href={request.person.info.pageLinkVk}
@@ -70,50 +67,39 @@ const CustomerRequestTable: FC<CustomerRequestTableProps> =
                                 >
                                     {request.person.info.pageLinkVk}
                                 </Link>
-                            </Typography>
+                            </Caption>
                         </TableCell>
                         <TableCell>
-                            <Typography
-                                variant={'body2'}
-                            >
+                            <Body>
                                 {request.coach?.compactName}
-                            </Typography>
-                            <Typography
-                                variant={'body2'}
-                            >
+                            </Body>
+                            <Body>
                                 {request.coachingDirection?.title}
-                            </Typography>
-                            <Typography
-                                variant={'body2'}
-                            >
+                            </Body>
+                            <Body>
                                 {DateTimeUtils.toDDmmYYYYmmHH(request.planDateTime)}
-                            </Typography>
+                            </Body>
                         </TableCell>
                         <TableCell>
-                            <Typography
-                                variant={'body1'}
+                            <Body
                                 sx={{color: createColorByEvent(request.currentStatus)}}
                             >
                                 {request.currentStatus.title}
-                            </Typography>
+                            </Body>
                         </TableCell>
                         <TableCell
                             sx={{maxWidth: '200px'}}
                         >
-                            <Typography
-                                variant={'caption'}
-                            >
+                            <Caption>
                                 {request.info}
-                            </Typography>
+                            </Caption>
                         </TableCell>
                         <TableCell>
-                            <Typography
-                                variant={'caption'}
-                            >
+                            <Caption>
                                 {DateTimeUtils.toDDmmYYYYmmHH(request.callDateTime)}
-                            </Typography>
+                            </Caption>
                         </TableCell>
-                    </TableRow>
+                    </AppTableRow>
                 }
             />
         );
