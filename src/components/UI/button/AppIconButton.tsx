@@ -12,6 +12,7 @@ interface AppIconButtonProps {
     onClick?: MouseEventHandler | undefined;
     children?: React.ReactNode | string | null,
     disabled?: boolean
+    submit?: boolean
 }
 
 const AppIconButton: FC<AppIconButtonProps> =
@@ -22,6 +23,7 @@ const AppIconButton: FC<AppIconButtonProps> =
          onClick,
          children,
          disabled,
+         submit,
      }) => {
         return (
             <Tooltip title={tooltipTitle || ''}>
@@ -30,6 +32,7 @@ const AppIconButton: FC<AppIconButtonProps> =
                     color={color}
                     disabled={disabled || false}
                     onClick={onClick}
+                    type={submit ? 'submit' : undefined}
                 >
                     {children}
                 </IconButton>

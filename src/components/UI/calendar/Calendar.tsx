@@ -10,8 +10,8 @@ import {CalendarThemeContext} from "../../../context/CalendarThemeContext";
 
 interface CalendarProps {
     title?: string
-    renderSideBar?: () => React.ReactNode,
-    renderDayContent?: (day: dayjs.Dayjs) => React.ReactNode
+    renderSideBar?: (updateMonth: () => void, currentMonthISODataString: () => string) => React.ReactNode,
+    renderDayContent?: (day: dayjs.Dayjs, updateDays: dayjs.Dayjs[]) => React.ReactNode
 }
 
 const Calendar: FC<CalendarProps> = ({title, renderSideBar, renderDayContent}) => {
@@ -28,7 +28,10 @@ const Calendar: FC<CalendarProps> = ({title, renderSideBar, renderDayContent}) =
         handleNextMonthSmall,
         handlePrevMonthSmall,
         selectedMonthCalendarSmall,
-        currentMonthSmalTextFormat
+        currentMonthSmalTextFormat,
+        updateDays,
+        updateMonth,
+        currentMonthISODataString,
     } = useCalendar()
 
     const {
@@ -61,6 +64,8 @@ const Calendar: FC<CalendarProps> = ({title, renderSideBar, renderDayContent}) =
                         className={classes.container}
                     >
                         <Sidebar
+                            currentMonthISODataString={currentMonthISODataString}
+                            updateMonth={updateMonth}
                             renderSideBar={renderSideBar}
                             currentMonth={currenMonthSmall}
                             currentMonthNumber={currentMonthNumberSmall}
@@ -68,10 +73,10 @@ const Calendar: FC<CalendarProps> = ({title, renderSideBar, renderDayContent}) =
                             handlePrevMonth={handlePrevMonthSmall}
                             selectedMonth={selectedMonthCalendarSmall}
                             currentMonthTextFormat={currentMonthSmalTextFormat}
-
                         />
                         <Month
                             month={currenMonth}
+                            updateDays={updateDays}
                             currentMonthNumber={currentMonthNumber}
                             renderDayContent={renderDayContent}
                         />

@@ -10,7 +10,9 @@ interface SidebarProps {
     handleNextMonth: () => void,
     selectedMonth: () => void,
     currentMonthTextFormat: string,
-    renderSideBar?: () => React.ReactNode
+    renderSideBar?: (updateMonth: () => void, currentMonthISODataString: () => string) => React.ReactNode
+    updateMonth: () => void
+    currentMonthISODataString: () => string
 }
 
 const Sidebar: FC<SidebarProps> =
@@ -22,6 +24,8 @@ const Sidebar: FC<SidebarProps> =
          selectedMonth,
          currentMonthTextFormat,
          renderSideBar,
+         updateMonth,
+         currentMonthISODataString
      }) => {
         return (
             <div
@@ -35,7 +39,7 @@ const Sidebar: FC<SidebarProps> =
                     selectedMonth={selectedMonth}
                     currentMonthTextFormat={currentMonthTextFormat}
                 />
-                {renderSideBar && renderSideBar()}
+                {renderSideBar && renderSideBar(updateMonth, currentMonthISODataString)}
             </div>
         );
     }

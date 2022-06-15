@@ -7,15 +7,17 @@ import Zoom from '@mui/material/Zoom';
 
 interface DayProps {
     day: dayjs.Dayjs,
+    updateDays: dayjs.Dayjs[]
     currentMonthNumber: number,
     rowIdx: number,
     dayIx: number,
-    renderDayContent?: (day: dayjs.Dayjs) => React.ReactNode
+    renderDayContent?: (day: dayjs.Dayjs, updateDays: dayjs.Dayjs[]) => React.ReactNode
 }
 
 const Day: FC<DayProps> =
     ({
          day,
+         updateDays,
          currentMonthNumber,
          rowIdx,
          dayIx,
@@ -58,7 +60,7 @@ const Day: FC<DayProps> =
                     <Box
                         className={classes.dayContent}
                     >
-                        {renderDayContent && renderDayContent(day)}
+                        {renderDayContent && renderDayContent(day, updateDays)}
                     </Box>
                 </Card>
             </Zoom>

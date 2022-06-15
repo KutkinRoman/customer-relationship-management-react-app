@@ -13,13 +13,15 @@ import {observer} from "mobx-react-lite";
 import {CoachingTimeTableContext} from "../../../context/CoachingTimeTableContext";
 import CoachingSessionsModal from "./CoachingSessionsModal";
 import useModal from "../../../hooks/useModal";
+import AppLoadingButton from "../../UI/button/AppLoadingButton";
 
 interface CoachingDayItemProps {
     day: dayjs.Dayjs,
+    updateDays: dayjs.Dayjs[]
     handleOnClick: (day: dayjs.Dayjs, sessions?: ICoachingSession[]) => void
 }
 
-const CoachingDayItem: FC<CoachingDayItemProps> = observer(({day, handleOnClick}) => {
+const CoachingDayItem: FC<CoachingDayItemProps> = observer(({day, updateDays, handleOnClick}) => {
 
     const coachingDirectionStore = useContext(CoachingContext)
     const coachingTimeTableStore = useContext(CoachingTimeTableContext)
@@ -45,6 +47,10 @@ const CoachingDayItem: FC<CoachingDayItemProps> = observer(({day, handleOnClick}
     }, [])
 
 
+    useEffect(() => {
+        fetch()
+    }, [updateDays])
+
     return (
         <Box
             onClick={() => handleOnClick(day, sessions)}
@@ -59,6 +65,10 @@ const CoachingDayItem: FC<CoachingDayItemProps> = observer(({day, handleOnClick}
                         return ''
                     }
 
+                    if (!session.id || !session.coach) {
+                        return ''
+                    }
+
                     return (
                         <DayItem
                             time={session.time}
@@ -70,7 +80,12 @@ const CoachingDayItem: FC<CoachingDayItemProps> = observer(({day, handleOnClick}
                                     type={'checkbox'}
                                     style={{margin: '2px'}}
                                     checked={coachingTimeTableStore.message.sessionIds?.includes(session.id)}
-                                    onChange={event => coachingTimeTableStore?.message?.checkedBySessionId(event.target.checked, session.id)}
+                                    onChange={event => {
+                                        if (session.id) {
+                                            coachingTimeTableStore?.message?.checkedBySessionId(event.target.checked, session.id)
+                                        }
+                                    }
+                                    }
                                 />
                             }
                         </DayItem>
@@ -81,40 +96,66 @@ const CoachingDayItem: FC<CoachingDayItemProps> = observer(({day, handleOnClick}
     )
 })
 
+interface CoachingSideBarProps {
+    updateMonth: () => void
+    currentMonthISODataString: () => string
+}
 
-const CoachingSideBar: FC = observer(() => {
+const CoachingSideBar: FC<CoachingSideBarProps> = observer(({updateMonth, currentMonthISODataString}) => {
 
     const coachingTimeTableStore = useContext(CoachingTimeTableContext)
     const coachingDirectionStore = useContext(CoachingContext)
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         coachingDirectionStore?.setCurrentDirectionById(parseInt(e.target.value))
     }
 
+    const handleAuthTimeTable = async () => {
+        setIsLoading(true)
+        try {
+            await CoachingService.initAuthTimeTableThisDate(currentMonthISODataString())
+            updateMonth()
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
     return (
-        <AppFormAction>
-            <AppTextField
-                select={true}
-                color={'primary'}
-                label={'Направление'}
-                variant={'standard'}
-                options={coachingDirectionStore?.data || []}
-                value={coachingDirectionStore?.currentDirectionId || null}
-                onChange={handleOnChange}
-                optionNull={'ВСЕ'}
-                disabled={!!coachingTimeTableStore?.message}
-                renderOption={(option) =>
-                    <MenuItem
-                        key={`coachingDirection${option.id}`}
-                        value={option.id}
-                    >
-                        {option.title}
-                    </MenuItem>
-                }
-            />
-        </AppFormAction>
+        <React.Fragment>
+            <AppFormAction>
+                <AppTextField
+                    select={true}
+                    color={'primary'}
+                    label={'Направление'}
+                    variant={'standard'}
+                    options={coachingDirectionStore?.data || []}
+                    value={coachingDirectionStore?.currentDirectionId || null}
+                    onChange={handleOnChange}
+                    optionNull={'ВСЕ'}
+                    disabled={!!coachingTimeTableStore?.message}
+                    renderOption={(option) =>
+                        <MenuItem
+                            key={`coachingDirection${option.id}`}
+                            value={option.id}
+                        >
+                            {option.title}
+                        </MenuItem>
+                    }
+                />
+            </AppFormAction>
+            <AppFormAction>
+                <AppLoadingButton
+                    onClick={handleAuthTimeTable}
+                    loading={isLoading}
+                >
+                    АВТОГРАФИК
+                </AppLoadingButton>
+            </AppFormAction>
+        </React.Fragment>
     )
 })
+
 
 const CoachingTimeTable: FC = observer(() => {
 
@@ -127,15 +168,20 @@ const CoachingTimeTable: FC = observer(() => {
         sessionsModal.handleOpen()
     }
 
+
     return (
         <React.Fragment>
             <Calendar
                 title={'Расписание тренировок'}
-                renderSideBar={() =>
-                    <CoachingSideBar/>
+                renderSideBar={(updateMonth, currentMonthISODataString) =>
+                    <CoachingSideBar
+                        updateMonth={updateMonth}
+                        currentMonthISODataString={currentMonthISODataString}
+                    />
                 }
-                renderDayContent={day =>
+                renderDayContent={(day, updateDays) =>
                     <CoachingDayItem
+                        updateDays={updateDays}
                         day={day}
                         handleOnClick={handleOnClickDay}
                     />

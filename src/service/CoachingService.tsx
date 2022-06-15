@@ -28,5 +28,21 @@ export class CoachingService {
         })
     }
 
+    public static async createNewSession(data: any) {
+        return await AUTH_API.post('/api/v1/coaching/sessions', {...data})
+    }
+
+    public static async updateSession(sessionId: number, data: any) {
+        return await AUTH_API.put(`/api/v1/coaching/sessions/${sessionId}`, {...data})
+    }
+
+    public static async initAuthTimeTableThisDate(date: any) {
+        return await AUTH_API.post('/api/v1/coaching/sessions/auto/time-table', {}, {
+            params: {
+                date
+            }
+        })
+    }
+
 
 }

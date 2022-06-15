@@ -7,12 +7,13 @@ export class DateTimeUtils {
         }
     }
 
-    static toISODateTimeString(date: Date | null) {
+    static toISODateTimeString(date: Date | null): string {
         if (date) {
             date = new Date(date)
             const d = date.toLocaleDateString()
             return `${d.substring(6, 10)}-${d.substring(3, 5)}-${d.substring(0, 2)}T${date.toTimeString().substring(0, 8)}`;
         }
+        return ''
     }
 
     static toISOTimeString(date: Date | null) {

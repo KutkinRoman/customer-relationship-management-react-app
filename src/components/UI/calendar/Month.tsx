@@ -5,13 +5,15 @@ import dayjs from "dayjs";
 
 interface MonthProps {
     month: dayjs.Dayjs[][],
+    updateDays: dayjs.Dayjs[]
     currentMonthNumber: number,
-    renderDayContent?: (day: dayjs.Dayjs) => React.ReactNode
+    renderDayContent?: (day: dayjs.Dayjs, updateDays: dayjs.Dayjs[]) => React.ReactNode
 }
 
 const Month: FC<MonthProps> =
     ({
          month,
+         updateDays,
          currentMonthNumber,
          renderDayContent
      }) => {
@@ -31,6 +33,7 @@ const Month: FC<MonthProps> =
                                 currentMonthNumber={currentMonthNumber}
                                 rowIdx={i}
                                 dayIx={idx}
+                                updateDays={updateDays}
                                 renderDayContent={renderDayContent}
                             />
                         ))}

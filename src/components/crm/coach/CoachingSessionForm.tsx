@@ -1,14 +1,16 @@
-import React, {FC, useContext, useEffect} from 'react';
+import React, {FC, useContext, useEffect, useState} from 'react';
 import {ICoachingSession} from "../../../model/coach/CoachingSession";
 import {useForm} from "react-hook-form";
 import AppDateTimePickerController from "../../UI/form/AppDateTimePickerController";
 import AppTextFieldController from "../../UI/form/AppTextFiledController";
-import {Box, Card, MenuItem, Typography} from "@mui/material";
+import {Box, Card, CircularProgress, MenuItem, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import {CoachContext} from "../../../context/CoachContext";
 import SaveIcon from '@mui/icons-material/Save';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import AppIconButton from "../../UI/button/AppIconButton";
+import {CoachingService} from "../../../service/CoachingService";
+import {DateTimeUtils} from "../../../utils/DateTimeUtils";
 
 const SessionCardStyled = styled(Card)(({theme}) => ({
     marginBottom: '5px',
@@ -48,6 +50,7 @@ interface CoachingSessionFormProps {
 const CoachingSessionForm: FC<CoachingSessionFormProps> = ({session}) => {
 
     const coachStore = useContext(CoachContext)
+    const [isLoading, setIsLoading] = useState(false)
 
     const {
         control,
@@ -57,13 +60,32 @@ const CoachingSessionForm: FC<CoachingSessionFormProps> = ({session}) => {
             isDirty,
             isValid
         },
-
+        handleSubmit
     } = useForm()
 
     useEffect(() => {
         resetField('dateTime', {defaultValue: session.dateTime})
-        resetField('coachId', {defaultValue: session.coach.id})
+
+        resetField('directionId', {defaultValue: session.direction.id})
+        if (session.coach) {
+            resetField('coachId', {defaultValue: session.coach.id})
+        }
     }, [])
+
+    const onSubmit = async (data: any) => {
+        data.dateTime = DateTimeUtils.toISODateTimeString(data.dateTime)
+        data.directionId = session.direction.id
+        setIsLoading(true)
+        try {
+            if (session.id) {
+                await CoachingService.updateSession(session.id, data)
+            } else {
+                await CoachingService.createNewSession(data)
+            }
+        } finally {
+            setIsLoading(false)
+        }
+    }
 
     return (
         <SessionCardStyled>
@@ -73,9 +95,11 @@ const CoachingSessionForm: FC<CoachingSessionFormProps> = ({session}) => {
                 width={'150px'}
                 textAlign={'center'}
             >
-                {session.direction.title}
+                {session?.direction.title}
             </Typography>
-            <form>
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+            >
                 <SessionFormStyled>
                     <SessionFormFieldsStyled>
                         <AppDateTimePickerController
@@ -103,19 +127,29 @@ const CoachingSessionForm: FC<CoachingSessionFormProps> = ({session}) => {
                         />
                     </SessionFormFieldsStyled>
                     <SessionFormActionStyled>
-                        <AppIconButton
-                            tooltipTitle={'Удалить'}
-                            color={'secondary'}
-                        >
-                            <DeleteForeverIcon/>
-                        </AppIconButton>
-                        <AppIconButton
-                            tooltipTitle={'Сохранить'}
-                            color={'primary'}
-                            disabled={!isValid || !isDirty}
-                        >
-                            <SaveIcon/>
-                        </AppIconButton>
+                        {isLoading
+                            ?
+                            <CircularProgress
+                                color={'primary'}
+                            />
+                            :
+                            <React.Fragment>
+                                <AppIconButton
+                                    tooltipTitle={'Удалить'}
+                                    color={'secondary'}
+                                >
+                                    <DeleteForeverIcon/>
+                                </AppIconButton>
+                                <AppIconButton
+                                    tooltipTitle={'Сохранить'}
+                                    color={'primary'}
+                                    disabled={!isValid || !isDirty}
+                                    submit={true}
+                                >
+                                    <SaveIcon/>
+                                </AppIconButton>
+                            </React.Fragment>
+                        }
                     </SessionFormActionStyled>
                 </SessionFormStyled>
             </form>

@@ -9,6 +9,8 @@ export const useCalendar = () => {
     dayjs.locale(locale, null, true)
     dayjs.locale('ru')
 
+    const [updateDays, setUpdateDays] = useState<dayjs.Dayjs[]>([])
+
     const [currenMonth, setCurrentMonth] = useState(getMonth());
     const [monthIndex, setMonthIndex] = useState(dayjs().month());
 
@@ -43,6 +45,24 @@ export const useCalendar = () => {
         setMonthIndex(monthIndexSmall)
     }
 
+    function addUpdateDay(day: dayjs.Dayjs) {
+        setUpdateDays([...updateDays, day])
+    }
+
+    function removeUpdateDay(day: dayjs.Dayjs) {
+        setUpdateDays([...updateDays.filter(d => d !== day)])
+    }
+
+    function updateMonth() {
+        getMonth(monthIndex).forEach(days =>
+            setUpdateDays([...updateDays, ...days])
+        )
+    }
+
+    function currentMonthISODataString() {
+        return dayjs(new Date(dayjs().year(), monthIndex)).format('YYYY-MM-DD')
+    }
+
     useEffect(() => {
         setCurrentMonth(getMonth(monthIndex));
         setMonthIndexSmall(monthIndex)
@@ -65,7 +85,7 @@ export const useCalendar = () => {
     const currentMonthNumberSmall = useMemo(() => {
         return new Date(dayjs().year(), monthIndexSmall).getMonth()
     }, [monthIndexSmall])
-    
+
     const currentMonthSmalTextFormat = useMemo(() => {
         return dayjs(new Date(dayjs().year(), monthIndexSmall)).format(
             "MMMM YYYY"
@@ -73,13 +93,12 @@ export const useCalendar = () => {
     }, [monthIndexSmall])
 
 
-
     return {
         currenMonth,
         setCurrentMonth,
         monthIndex,
-        currentMonthNumber,
         setMonthIndex,
+        currentMonthNumber,
         handleNextMonth,
         handlePrevMonth,
         handleReset,
@@ -92,6 +111,11 @@ export const useCalendar = () => {
         handleNextMonthSmall,
         handlePrevMonthSmall,
         selectedMonthCalendarSmall,
-        currentMonthSmalTextFormat
+        currentMonthSmalTextFormat,
+        updateDays,
+        addUpdateDay,
+        removeUpdateDay,
+        updateMonth,
+        currentMonthISODataString
     }
 }
