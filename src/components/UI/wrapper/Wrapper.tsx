@@ -1,10 +1,10 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useContext} from 'react';
 import {Box} from "@mui/material";
 import cl from "./Wrapper.module.css";
-import defaultBackgroundImage from '../../../assect/images/background_image.jpg'
-import backgroundImage from '../../../assect/images/default_background_image.jpg'
 import {styled} from "@mui/material/styles";
 import CustomizationThemePanel from "../theme/CustomizationThemePanel";
+import {ImageContext} from "../../../context/ImageContext";
+import {observer} from "mobx-react-lite";
 
 interface WrapperProps {
     children: React.ReactNode
@@ -21,15 +21,9 @@ const BackgroundLinearGradientStyled = styled(Box)(({theme}) => ({
     background: theme.palette.background.linearGradient,
 }))
 
-const Wrapper: FC<WrapperProps> = ({children}) => {
+const Wrapper: FC<WrapperProps> = observer(({children}) => {
 
-    const [image, setImage] = useState(defaultBackgroundImage)
-
-    useEffect(() => {
-        setTimeout(() => {
-            setImage(backgroundImage)
-        }, 1500)
-    }, [])
+    const imageContext = useContext(ImageContext)
 
     return (
         <Box
@@ -39,7 +33,7 @@ const Wrapper: FC<WrapperProps> = ({children}) => {
         >
             <Box
                 className={cl.wrapperBackground}
-                sx={{backgroundImage: `url(${image})`}}
+                sx={{backgroundImage: `url(${imageContext.backgroundImage})`}}
             />
             <BackgroundLinearGradientStyled/>
             {children}
@@ -47,6 +41,6 @@ const Wrapper: FC<WrapperProps> = ({children}) => {
             <CustomizationThemePanel/>
         </Box>
     );
-};
+});
 
 export default Wrapper;

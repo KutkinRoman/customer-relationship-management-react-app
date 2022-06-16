@@ -16,7 +16,6 @@ class DarkPalette implements ICustomPalette {
     constructor(color: IColor) {
         this.primaryColor = color.primary;
         this.secondaryColor = color.secondary;
-        // makeAutoObservable(this)
     }
 
     setPrimaryColor(color: string): void {

@@ -1,7 +1,6 @@
 import React, {createContext, FC} from 'react';
 
 import {CustomerRequestEventColorStore} from "../store/customer-request/CustomerRequestEventColorStore";
-import CustomerRequestFab from "../components/crm/customer-request/CustomerRequestFab";
 
 const store = new CustomerRequestEventColorStore()
 
@@ -14,7 +13,7 @@ const CustomerRequestEventColorContextProvider: FC<Props> = ({children}) => {
     return (
         <React.Fragment>
             {children}
-            <CustomerRequestFab/>
+            {/*<CustomerRequestFab/>*/}
         </React.Fragment>
     );
 };

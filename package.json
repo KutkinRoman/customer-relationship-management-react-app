@@ -31,6 +31,7 @@
     "react-colorful": "^5.0.0",
     "react-dom": "latest",
     "react-dropzone": "^11.7.1",
+    "react-dropzone-uploader": "^2.11.0",
     "react-hook-form": "^7.31.3",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",

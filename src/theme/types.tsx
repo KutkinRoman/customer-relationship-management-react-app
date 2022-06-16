@@ -3,14 +3,21 @@ import {PaletteMode, Theme} from "@mui/material";
 export interface ICustomTheme {
     theme: Theme;
     palette: ICustomPalette
+    userPalette?: ICustomPalette
     isUpdate: boolean
     isLoading: boolean
+    isUserTheme: boolean
 
     lightTheme: () => void
     darkTheme: () => void
     changeTheme: () => void
     update: () => void
     save: () => void
+    saveCurrentPaletteByUsernameId: (username: string) => void
+    updatePaletteByUsernameId: (username: string) => void
+    updateUserPalette: () => void
+    deletePaletteByUsername: (username: string) => void;
+    resetTheme: () => void
 }
 
 export interface IColor {
@@ -32,7 +39,6 @@ export interface ICustomPalette {
     errorColor: string,
     infoColor: string,
     warningColor: string,
-
 
     setPrimaryColor: (color: string) => void
     setSecondaryColor: (color: string) => void

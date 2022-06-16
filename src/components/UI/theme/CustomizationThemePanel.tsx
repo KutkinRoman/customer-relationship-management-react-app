@@ -18,11 +18,40 @@ import {observer} from "mobx-react-lite";
 import AppLoadingButton from "../button/AppLoadingButton";
 import CustomizationBackgroundModal from "./CustomizationBackgroundModal";
 import AppFormAction from "../form/AppFormAction";
+import {AuthContext} from "../../../context/AuthContext";
+import AppDivider from "../divider/AppDivider";
+import AppButton from "../button/AppButton";
 
 const CustomizationThemePanel = observer(() => {
 
-    const {isOpen, handleClose, handleOpen} = useModal()
     const theme = useContext(CustomThemeContext)
+    const auth = useContext(AuthContext)
+    const {isOpen, handleClose, handleOpen} = useModal()
+
+
+    function savePalette() {
+        handleClose()
+        if (auth?.isAuth && auth.user) {
+            theme.saveCurrentPaletteByUsernameId(auth.user.username)
+        }
+    }
+
+    function handleUpdateUserPalette() {
+        handleClose()
+        theme.updateUserPalette()
+    }
+
+    function handleDeleteUserPalette() {
+        if (auth?.user) {
+            handleClose()
+            theme.deletePaletteByUsername(auth.user.username)
+        }
+    }
+
+    function handleReset() {
+        handleClose()
+        theme.resetTheme()
+    }
 
     return (
         <React.Fragment>
@@ -103,15 +132,39 @@ const CustomizationThemePanel = observer(() => {
                             </AppCard>
                         </DialogContent>
                         <AppFormAction>
+                            <AppButton
+                                onClick={handleReset}
+                                disabled={!theme.isUpdate}
+                            >
+                                Сбросить
+                            </AppButton>
                             <AppLoadingButton
-                                variant={'contained'}
-                                onClick={() => theme.save()}
+                                onClick={savePalette}
                                 disabled={!theme.isUpdate}
                                 loading={theme.isLoading}
                             >
                                 Сохранить
                             </AppLoadingButton>
-                            <CustomizationBackgroundModal/>
+                            <AppDivider/>
+                            <CustomizationBackgroundModal
+                                handleClosePanel={handleClose}
+                            />
+                            <AppDivider/>
+                            <AppButton
+                                disabled={!theme.userPalette || theme.isUserTheme}
+                                onClick={handleUpdateUserPalette}
+                            >
+                                Custom
+                            </AppButton>
+                            <React.Fragment>
+                                <AppDivider/>
+                                <AppButton
+                                    disabled={!theme.userPalette}
+                                    onClick={handleDeleteUserPalette}
+                                >
+                                    Delete
+                                </AppButton>
+                            </React.Fragment>
                         </AppFormAction>
                     </CustomizationThemePanelContent>
                 </CustomizationThemePanelPaper>

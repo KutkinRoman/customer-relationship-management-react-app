@@ -1,20 +1,50 @@
-import React from 'react';
+import React, {FC, useContext} from 'react';
 import {AppModal} from "../modal/AppModal";
 import useModal from "../../../hooks/useModal";
 import AppButton from "../button/AppButton";
 import {Box} from "@mui/material";
-import Dropzone from "../dropzone/dropzone";
+import AppDropzone from "../dropzone/Dropzone";
+import {useReader} from "../../../hooks/useReader";
+import Fab from '@mui/material/Fab';
+import SaveAsIcon from '@mui/icons-material/SaveAs';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import {ImageContext} from "../../../context/ImageContext";
+import {observer} from "mobx-react-lite";
+import {AuthContext} from "../../../context/AuthContext";
 
-const CustomizationBackgroundModal = () => {
+interface Props {
+    handleClosePanel: () => void
+}
 
+const CustomizationBackgroundModal: FC<Props> = observer(({handleClosePanel}) => {
+
+    const auth = useContext(AuthContext)
+    const imageContext = useContext(ImageContext)
     const {isOpen, handleOpen, handleClose} = useModal()
+    const {read, file, result, clear} = useReader()
+
+    const onDrop = (files: File[]) => {
+        read(files[0])
+    }
+
+    const save = () => {
+        handleClosePanel()
+        handleClose()
+        if (result) {
+            imageContext.setBackgroundImage(result)
+        }
+        if (result && auth?.isAuth && auth.user) {
+            imageContext.saveBackgroundImageByUsernameId(auth.user.username, result)
+        }
+    }
+
 
     return (
         <React.Fragment>
             <AppButton
                 onClick={handleOpen}
             >
-                Добавить изображение
+                Фоновое изображение
             </AppButton>
             <AppModal
                 isOpen={isOpen}
@@ -23,12 +53,52 @@ const CustomizationBackgroundModal = () => {
                 <Box
                     width={'90vw'}
                     height={'90vh'}
+                    display={'flex'}
+                    justifyContent={'center'}
+                    alignItems={'center'}
                 >
-                    <Dropzone/>
+                    {result
+                        ?
+                        <React.Fragment>
+                            <img
+                                src={result}
+                                alt={'image'}
+                                style={{
+                                    width: '85vw',
+                                    height: '85vh'
+                                }}
+                            />
+                            <Box
+                                marginLeft={'10px'}
+                            >
+                                <Fab
+                                    sx={{marginBottom: '10px'}}
+                                    color={'primary'}
+                                    onClick={clear}
+                                >
+                                    <HighlightOffIcon
+                                        fontSize={'large'}
+                                    />
+                                </Fab>
+                                <Fab
+                                    color={'primary'}
+                                    onClick={save}
+                                >
+                                    <SaveAsIcon
+                                        fontSize={'large'}
+                                    />
+                                </Fab>
+                            </Box>
+                        </React.Fragment>
+                        :
+                        <AppDropzone
+                            onDrop={onDrop}
+                        />
+                    }
                 </Box>
             </AppModal>
         </React.Fragment>
     );
-};
+});
 
 export default CustomizationBackgroundModal;
