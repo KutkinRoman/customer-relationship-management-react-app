@@ -51,7 +51,7 @@ const ConversationsPage = observer(() => {
                     spacing={2}
                 >
                     {conversationStore.isLoading &&
-                        [...new Array(2)].map(() =>
+                        [...new Array(6)].map(() =>
                             <Grid
                                 item
                                 xs={12}
