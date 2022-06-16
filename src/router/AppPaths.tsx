@@ -1,7 +1,8 @@
 export class AppPaths {
     static readonly index: string = '';
     static readonly login: string = 'login';
-    static readonly coachingTimeTable: string = 'coaching-time-table';
+    static readonly timeTable: string = 'time-table'
+    static readonly coachingTimeTable: string = `${AppPaths.timeTable}/coaching`;
 
     static readonly indexCRM: string = 'crm';
     static readonly registration: string = 'registration';

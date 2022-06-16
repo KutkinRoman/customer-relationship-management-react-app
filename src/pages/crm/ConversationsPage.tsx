@@ -61,6 +61,7 @@ const ConversationsPage = observer(() => {
                             key={`conversationCard_${conversation.id}`}
                         >
                             <ConversationCard
+                                hover={true}
                                 conversation={conversation}
                                 initFormByConversation={initFormByConversation}
                             />

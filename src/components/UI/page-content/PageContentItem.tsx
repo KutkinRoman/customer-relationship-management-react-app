@@ -21,7 +21,7 @@ const PageContentItem: FC<PageContentProps> =
                 className={[classes.item, className].join(' ')}
                 bgcolor={'background.paper'}
                 sx={{...sx, borderRadius: '16px'}}
-                boxShadow={5}
+                boxShadow={1}
             >
                 {children}
             </Box>

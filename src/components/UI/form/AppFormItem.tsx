@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Box, Typography} from "@mui/material";
+import {Box} from "@mui/material";
 import {SubTitle} from "../typography/Typography";
 
 interface AppFormItemProps {
@@ -11,9 +11,9 @@ const AppFormItem: FC<AppFormItemProps> = ({children, title}) => {
     return (
         <Box
             borderRadius={'16px'}
-            bgcolor={'divider'}
+            bgcolor={'input.container'}
             padding={'10px'}
-            margin={'5px'}
+            margin={'15px'}
         >
             {title &&
                 <SubTitle>

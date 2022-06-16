@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 import Month from "./Month";
 import classes from './index.module.css'
 import {useCalendar} from "../../../hooks/useCalendar";
-import {Box, ThemeProvider} from "@mui/material";
+import {Box} from "@mui/material";
 import dayjs from "dayjs";
 import {CalendarThemeContext} from "../../../context/CalendarThemeContext";
 
@@ -34,56 +34,44 @@ const Calendar: FC<CalendarProps> = ({title, renderSideBar, renderDayContent}) =
         currentMonthISODataString,
     } = useCalendar()
 
-    const {
-        mode,
-        theme,
-        changeMode
-    } = useContext(CalendarThemeContext)
-
     return (
-        <ThemeProvider
-            theme={theme}
+        <Box
+            className={classes.wrapper}
+            bgcolor={'background.paper'}
         >
-            <Box
-                className={classes.wrapper}
-                bgcolor={'background.paper'}
+            <div
+                className={classes.calendar}
             >
+                <CalendarHeader
+                    handleNextMonth={handleNextMonth}
+                    handlePrevMonth={handlePrevMonth}
+                    handleReset={handleReset}
+                    currentMonthTextFormat={currentMonthTextFormat}
+                    title={title}
+                />
                 <div
-                    className={classes.calendar}
+                    className={classes.container}
                 >
-                    <CalendarHeader
-                        handleNextMonth={handleNextMonth}
-                        handlePrevMonth={handlePrevMonth}
-                        handleReset={handleReset}
-                        currentMonthTextFormat={currentMonthTextFormat}
-                        title={title}
-                        mode={mode}
-                        changeMode={changeMode}
+                    <Sidebar
+                        currentMonthISODataString={currentMonthISODataString}
+                        updateMonth={updateMonth}
+                        renderSideBar={renderSideBar}
+                        currentMonth={currenMonthSmall}
+                        currentMonthNumber={currentMonthNumberSmall}
+                        handleNextMonth={handleNextMonthSmall}
+                        handlePrevMonth={handlePrevMonthSmall}
+                        selectedMonth={selectedMonthCalendarSmall}
+                        currentMonthTextFormat={currentMonthSmalTextFormat}
                     />
-                    <div
-                        className={classes.container}
-                    >
-                        <Sidebar
-                            currentMonthISODataString={currentMonthISODataString}
-                            updateMonth={updateMonth}
-                            renderSideBar={renderSideBar}
-                            currentMonth={currenMonthSmall}
-                            currentMonthNumber={currentMonthNumberSmall}
-                            handleNextMonth={handleNextMonthSmall}
-                            handlePrevMonth={handlePrevMonthSmall}
-                            selectedMonth={selectedMonthCalendarSmall}
-                            currentMonthTextFormat={currentMonthSmalTextFormat}
-                        />
-                        <Month
-                            month={currenMonth}
-                            updateDays={updateDays}
-                            currentMonthNumber={currentMonthNumber}
-                            renderDayContent={renderDayContent}
-                        />
-                    </div>
+                    <Month
+                        month={currenMonth}
+                        updateDays={updateDays}
+                        currentMonthNumber={currentMonthNumber}
+                        renderDayContent={renderDayContent}
+                    />
                 </div>
-            </Box>
-        </ThemeProvider>
+            </div>
+        </Box>
     );
 };
 

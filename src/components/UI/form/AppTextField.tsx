@@ -57,7 +57,10 @@ const AppTextField: FC<AppTextFieldProps> =
                 rows={rows || 1}
                 disabled={disabled || false}
                 InputProps={{
-                    readOnly
+                    readOnly,
+                    style: {
+                        color: 'primary.main'
+                    }
                 }}
             >
                 {(select && options && optionNull) &&

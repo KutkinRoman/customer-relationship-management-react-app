@@ -1,7 +1,6 @@
-import React, {FC, useContext} from 'react';
+import React, {FC} from 'react';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import {CalendarThemeContext} from "../../../context/CalendarThemeContext";
-import {Box, ThemeProvider, Typography} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import dayjs from "dayjs";
 import DialogContent from '@mui/material/DialogContent';
@@ -46,43 +45,37 @@ interface CalendarModalProps {
 
 const CalendarModal: FC<CalendarModalProps> = ({day, isOpen, handleClose, children}) => {
 
-    const {theme} = useContext(CalendarThemeContext)
-
     return (
-        <ThemeProvider
-            theme={theme}
+        <SwipeableDrawer
+            anchor={'left'}
+            open={isOpen}
+            onClose={handleClose}
+            onOpen={() => ''}
         >
-            <SwipeableDrawer
-                anchor={'left'}
-                open={isOpen}
-                onClose={handleClose}
-                onOpen={() => ''}
-            >
-                <ModalPaper>
-                    <ModalHeader>
-                        <Typography
-                            variant={'h5'}
-                            color={'primary'}
-                        >
-                            {day?.format("dddd").toUpperCase()}
-                        </Typography>
-                        <Typography
-                            variant={'h6'}
-                            color={'secondary'}
-                        >
-                            {day?.format("DD MMMM YYYY").toUpperCase()} ГОД
-                        </Typography>
-                    </ModalHeader>
-                    <ModalContent>
-                        <DialogContent
-                            dividers={true}
-                        >
-                            {children}
-                        </DialogContent>
-                    </ModalContent>
-                </ModalPaper>
-            </SwipeableDrawer>
-        </ThemeProvider>
+            <ModalPaper>
+                <ModalHeader>
+                    <Typography
+                        variant={'h5'}
+                        color={'primary'}
+                    >
+                        {day?.format("dddd").toUpperCase()}
+                    </Typography>
+                    <Typography
+                        variant={'h6'}
+                        color={'secondary'}
+                    >
+                        {day?.format("DD MMMM YYYY").toUpperCase()} ГОД
+                    </Typography>
+                </ModalHeader>
+                <ModalContent>
+                    <DialogContent
+                        dividers={true}
+                    >
+                        {children}
+                    </DialogContent>
+                </ModalContent>
+            </ModalPaper>
+        </SwipeableDrawer>
     )
 };
 

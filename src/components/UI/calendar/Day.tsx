@@ -28,11 +28,12 @@ const Day: FC<DayProps> =
             <Zoom
                 in={true}
             >
-                <Card
+                <Box
                     className={classes.day}
                     sx={{
-                        borderColor: dayIx <= 4 ? 'primary.light' : 'secondary.light',
-                        opacity: day.month() === currentMonthNumber ? '1' : '0.5'
+                        // borderColor: dayIx <= 4 ? 'secondary.light' : 'primary.light',
+                        borderColor: 'divider',
+                        opacity: day.month() === currentMonthNumber ? '1' : '0.1'
                     }}
                 >
                     {day.format("DD.MM.YYYY") === dayjs().format('DD.MM.YYYY') &&
@@ -47,12 +48,14 @@ const Day: FC<DayProps> =
                         <Typography
                             className={classes.dayOfWeek}
                             variant={'subtitle2'}
+                            color={'text.disabled'}
                         >
                             {day.format("dd").toUpperCase()}
                         </Typography>
                         <Typography
                             className={classes.dayOfMonth}
                             variant={'subtitle2'}
+                            color={'text.secondary'}
                         >
                             {day.format("DD.MM").toUpperCase()}
                         </Typography>
@@ -62,7 +65,7 @@ const Day: FC<DayProps> =
                     >
                         {renderDayContent && renderDayContent(day, updateDays)}
                     </Box>
-                </Card>
+                </Box>
             </Zoom>
         );
     }

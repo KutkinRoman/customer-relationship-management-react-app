@@ -8,25 +8,25 @@ enum Message {
 
 const styles = {
     '& .SnackbarItem-variantSuccess': {
-        backgroundColor: 'primary.light',
+        backgroundColor: 'background.paper',
         color: 'success.main',
         borderRadius: 5,
         fontWeight: 'bold'
     },
     '& .SnackbarItem-variantError': {
-        backgroundColor: 'primary.light',
+        backgroundColor: 'background.paper',
         color: 'error.main',
         borderRadius: 5,
         fontWeight: 'bold'
     },
     '& .SnackbarItem-variantWarning': {
-        backgroundColor: 'primary.light',
+        backgroundColor: 'background.paper',
         color: 'warning.main',
         borderRadius: 5,
         fontWeight: 'bold'
     },
     '& .SnackbarItem-variantInfo': {
-        backgroundColor: 'primary.light',
+        backgroundColor: 'background.paper',
         color: 'info.main',
         borderRadius: 5,
         fontWeight: 'bold'
@@ -40,7 +40,7 @@ interface Props {
 const AlertContentProvider: FC<Props> = ({children}) => {
     return (
         <SnackbarProvider
-            maxSnack={5}
+            maxSnack={10}
             // @ts-ignore
             sx={styles}
         >

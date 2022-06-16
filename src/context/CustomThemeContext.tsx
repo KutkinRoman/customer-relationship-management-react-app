@@ -1,30 +1,32 @@
 import React, {createContext, FC} from 'react';
 import {ICustomTheme} from "../theme/types";
 import {CustomTheme} from "../theme/CustomTheme";
-import {CustomDarkPalette} from "../theme/CustomDarkTheme";
 import {ThemeProvider} from "@mui/material";
+import {observer} from "mobx-react-lite";
 
 interface CustomThemeContextProviderProps {
     children: React.ReactNode
 }
 
-const customTheme = new CustomTheme(new CustomDarkPalette())
+const customTheme = new CustomTheme()
 
-const CustomThemeContextProvider: FC<CustomThemeContextProviderProps> = ({children}) => {
-    return (
-        <CustomThemeContext.Provider
-            value={customTheme}>
+const CustomThemeContextProvider: FC<CustomThemeContextProviderProps> = observer(
+    ({
+         children
+     }) => {
+
+        return (
             <ThemeProvider
                 theme={customTheme.theme}
             >
                 {children}
             </ThemeProvider>
-        </CustomThemeContext.Provider>
-    );
-};
+        );
+    });
 
-const CustomThemeContext = createContext<ICustomTheme | null>(null)
+const CustomThemeContext = createContext<ICustomTheme>(customTheme)
 
 export {
-    CustomThemeContextProvider
+    CustomThemeContextProvider,
+    CustomThemeContext
 }

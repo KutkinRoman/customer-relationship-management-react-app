@@ -5,6 +5,7 @@ import {Box, Button, IconButton, Typography, Zoom} from "@mui/material";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import Card from "@mui/material/Card";
+import {SubTitle} from "../../typography/Typography";
 
 interface SmallCalendarProps {
     currentMonth: dayjs.Dayjs[][],
@@ -35,12 +36,9 @@ const SmallCalendar: FC<SmallCalendarProps> =
                     <Box
                         className={classes.monthText}
                     >
-                        <Typography
-                            variant={'subtitle2'}
-                            color={'primary.main'}
-                        >
+                        <SubTitle>
                             {currentMonthTextFormat}
-                        </Typography>
+                        </SubTitle>
                     </Box>
                     <Box
                         className={classes.buttonGroup}
@@ -75,7 +73,7 @@ const SmallCalendar: FC<SmallCalendarProps> =
                                 <Typography
                                     key={i}
                                     className={classes.day}
-                                    color={'text.primary'}
+                                    color={'text.disabled'}
                                     variant={'subtitle2'}
                                 >
                                     {day.format("dd").toUpperCase()}
@@ -106,6 +104,7 @@ const SmallCalendar: FC<SmallCalendarProps> =
                                                     ? 'contained'
                                                     : 'outlined'
                                             }
+                                            color={'inherit'}
                                         >
                                             {day.format("DD")}
                                         </Button>

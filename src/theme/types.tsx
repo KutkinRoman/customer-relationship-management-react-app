@@ -1,8 +1,21 @@
 import {PaletteMode, Theme} from "@mui/material";
 
 export interface ICustomTheme {
+    theme: Theme;
     palette: ICustomPalette
-    theme: Theme
+    isUpdate: boolean
+    isLoading: boolean
+
+    lightTheme: () => void
+    darkTheme: () => void
+    changeTheme: () => void
+    update: () => void
+    save: () => void
+}
+
+export interface IColor {
+    primary: string,
+    secondary: string
 }
 
 export interface ICustomPalette {
@@ -14,11 +27,17 @@ export interface ICustomPalette {
     secondaryContrastText: string,
     textColor: string,
     backgroundColor: string,
-    shadowsColor: string
 
     successColor: string,
     errorColor: string,
     infoColor: string,
     warningColor: string,
 
+
+    setPrimaryColor: (color: string) => void
+    setSecondaryColor: (color: string) => void
+    setTextColor: (color: string) => void
+    setBackgroundColor: (color: string) => void
 }
+
+

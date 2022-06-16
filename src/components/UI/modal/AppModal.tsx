@@ -64,7 +64,7 @@ const AppModal: FC<AppModalProps> =
                         sx={modalTopStyle}
                     >
                         <AppIconButton
-                            color={'secondary'}
+                            color={'primary'}
                             onClick={handleClose}
                             disabled={isLoading || false}
                         >

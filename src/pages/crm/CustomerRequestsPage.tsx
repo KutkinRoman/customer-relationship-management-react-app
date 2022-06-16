@@ -78,7 +78,7 @@ const CustomerRequestsPage: FC = observer(() => {
                         display={'flex'}
                         justifyContent={'center'}
                         alignItems={'center'}
-                        marginBottom={'5px'}
+                        padding={'25px 0'}
                     >
                         <Pagination
                             page={customerRequestStore.filter.page}
@@ -101,15 +101,19 @@ const CustomerRequestsPage: FC = observer(() => {
                         display={'flex'}
                         justifyContent={'center'}
                         alignItems={'center'}
-                        marginTop={'5px'}
+                        padding={'20px 0'}
                     >
-                        <Pagination
-                            page={customerRequestStore.filter.page}
-                            count={customerRequestStore.data?.totalPages}
-                            onChange={handleChangePage}
-                            size={'large'}
-                            color={'primary'}
-                        />
+                        <PageContentItem
+                            sx={{padding: '5px'}}
+                        >
+                            <Pagination
+                                page={customerRequestStore.filter.page}
+                                count={customerRequestStore.data?.totalPages}
+                                onChange={handleChangePage}
+                                size={'large'}
+                                color={'primary'}
+                            />
+                        </PageContentItem>
                     </Box>
                 </Box>
             </Container>

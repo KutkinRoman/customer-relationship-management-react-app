@@ -7,6 +7,7 @@ import AppDivider from "../../UI/divider/AppDivider";
 import AppButton from "../../UI/button/AppButton";
 import AppButtonGroup from "../../UI/button/AppButtonGroup";
 import AppDateRangePickerSmall from "../../UI/date-time-picker/AppDateRangePickerSmall";
+import CustomerRequestEventColorPicker from "./CustomerRequestEventColorPicker";
 
 interface CustomerRequestFilterItemProps {
     children: React.ReactNode
@@ -66,28 +67,37 @@ const CustomerRequestFilter: FC<CustomerRequestFilterProps> = observer(
                 <AppDivider/>
                 <CustomerRequestFilterItem>
                     {filter.events.map(event =>
-                        <FormControlLabel
+                        <Box
                             key={`customerRequestEvent_${event.value}`}
-                            label={
-                                <Typography
-                                    variant={'caption'}
-                                    color={'text.secondary'}
-                                >
-                                    {event.title}
-                                </Typography>
-                            }
-                            control={
-                                <Checkbox
-                                    sx={{padding: '0 5px'}}
-                                    checked={event.isChecked}
-                                    onChange={(e, checked) => handleChange(event, checked)}
-                                    inputProps={{'aria-label': 'controlled'}}
-                                />
-                            }
+                            display={'flex'}
+                        >
+                            <CustomerRequestEventColorPicker
+                                event={event.value}
+                            />
+                            <FormControlLabel
 
-                        />
+                                label={
+                                    <Typography
+                                        variant={'caption'}
+                                        color={'text.secondary'}
+                                    >
+                                        {event.title}
+                                    </Typography>
+                                }
+                                control={
+                                    <Checkbox
+                                        sx={{padding: '0 5px'}}
+                                        checked={event.isChecked}
+                                        onChange={(e, checked) => handleChange(event, checked)}
+                                        inputProps={{'aria-label': 'controlled'}}
+                                    />
+                                }
+
+                            />
+                        </Box>
                     )}
                     <FormControlLabel
+                        sx={{paddingLeft: '30px'}}
                         label={
                             <Typography
                                 variant={'caption'}

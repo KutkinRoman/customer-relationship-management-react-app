@@ -1,14 +1,17 @@
 import React, {FC} from 'react';
 import {Box, Typography} from "@mui/material";
 import classes from "./index.module.css"
-import Card from "@mui/material/Card";
+import {SxProps} from "@mui/system";
+import {Theme} from "@mui/material/styles";
 
 interface DayItemProps {
     time?: string
     title?: string
     description?: string
     children?: React.ReactNode,
-    onClick?: () => void
+    onClick?: () => void,
+    sx?: SxProps<Theme>;
+    boxShadow?: number | 'none'
 }
 
 const DayItem: FC<DayItemProps> =
@@ -16,15 +19,19 @@ const DayItem: FC<DayItemProps> =
          time,
          title,
          description,
-         children
+         sx,
+         boxShadow,
+         children,
      }) => {
         return (
-            <Card
+            <Box
                 className={classes.dayItem}
+                sx={sx}
+                boxShadow={boxShadow || 1}
             >
                 <Typography
                     variant={'subtitle2'}
-                    color={'secondary.main'}
+                    color={'primary.main'}
                 >
                     {time}
                 </Typography>
@@ -33,14 +40,15 @@ const DayItem: FC<DayItemProps> =
                 >
                     <Typography
                         variant={'subtitle2'}
-                        color={'primary.main'}
+                        color={'secondary.main'}
                         fontSize={'10px'}
                         textAlign={'end'}
                     >
                         {title}
                     </Typography>
                     <Typography
-                        variant={'body2'}
+                        variant={'caption'}
+                        color={'text.secondary'}
                         fontSize={'8px'}
                         textAlign={'end'}
                     >
@@ -48,7 +56,7 @@ const DayItem: FC<DayItemProps> =
                     </Typography>
                 </Box>
                 {children}
-            </Card>
+            </Box>
         );
     };
 

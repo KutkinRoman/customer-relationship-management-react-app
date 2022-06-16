@@ -46,17 +46,17 @@ const AppFullScreenDialog: FC<AppFullScreenDialogProps> =
                     onClose={handleClose}
                     TransitionComponent={TransitionDialog}
                 >
-                    <AppBar
-                        color={'secondary'}
-                    >
+                    <AppBar>
                         <Toolbar>
                             <Heading
                                 sx={{ml: 2, flex: 1}}
+                                color={'inherit'}
                             >
                                 {title}
                             </Heading>
                             <AppIconButton
                                 onClick={handleClose}
+                                color={'inherit'}
                             >
                                 <CloseIcon/>
                             </AppIconButton>

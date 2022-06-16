@@ -6,14 +6,14 @@ import dayjs from "dayjs";
 import DayItem from "../../UI/calendar/DayItem";
 import DaySkeleton from "../../UI/calendar/DaySkeleton";
 import {AppTextField} from "../../UI/form/AppTextField";
-import AppFormAction from "../../UI/form/AppFormAction";
-import {Box, MenuItem} from "@mui/material";
+import {Box, MenuItem, Switch} from "@mui/material";
 import {CoachingContext} from "../../../context/CoachingContext";
 import {observer} from "mobx-react-lite";
 import {CoachingTimeTableContext} from "../../../context/CoachingTimeTableContext";
 import CoachingSessionsModal from "./CoachingSessionsModal";
 import useModal from "../../../hooks/useModal";
 import AppLoadingButton from "../../UI/button/AppLoadingButton";
+import AppFormItem from "../../UI/form/AppFormItem";
 
 interface CoachingDayItemProps {
     day: dayjs.Dayjs,
@@ -74,18 +74,31 @@ const CoachingDayItem: FC<CoachingDayItemProps> = observer(({day, updateDays, ha
                             time={session.time}
                             title={session.direction.title}
                             description={session.coach.compactName}
+                            sx={{
+                                opacity: coachingTimeTableStore?.message
+                                    ? coachingTimeTableStore.message.sessionIds?.includes(session.id)
+                                        ? '1'
+                                        : '0.7'
+                                    : '1'
+                            }}
+                            boxShadow={
+                                coachingTimeTableStore?.message
+                                    ? coachingTimeTableStore.message.sessionIds?.includes(session.id)
+                                        ? 1
+                                        : 'none'
+                                    : 1
+                            }
                         >
                             {coachingTimeTableStore?.message &&
-                                <input
-                                    type={'checkbox'}
-                                    style={{margin: '2px'}}
+                                <Switch
                                     checked={coachingTimeTableStore.message.sessionIds?.includes(session.id)}
                                     onChange={event => {
                                         if (session.id) {
                                             coachingTimeTableStore?.message?.checkedBySessionId(event.target.checked, session.id)
                                         }
-                                    }
-                                    }
+                                    }}
+                                    size={'small'}
+                                    inputProps={{'aria-label': 'controlled'}}
                                 />
                             }
                         </DayItem>
@@ -123,7 +136,7 @@ const CoachingSideBar: FC<CoachingSideBarProps> = observer(({updateMonth, curren
 
     return (
         <React.Fragment>
-            <AppFormAction>
+            <AppFormItem>
                 <AppTextField
                     select={true}
                     color={'primary'}
@@ -143,15 +156,16 @@ const CoachingSideBar: FC<CoachingSideBarProps> = observer(({updateMonth, curren
                         </MenuItem>
                     }
                 />
-            </AppFormAction>
-            <AppFormAction>
+            </AppFormItem>
+            <AppFormItem>
                 <AppLoadingButton
+                    variant={'text'}
                     onClick={handleAuthTimeTable}
                     loading={isLoading}
                 >
                     АВТОГРАФИК
                 </AppLoadingButton>
-            </AppFormAction>
+            </AppFormItem>
         </React.Fragment>
     )
 })

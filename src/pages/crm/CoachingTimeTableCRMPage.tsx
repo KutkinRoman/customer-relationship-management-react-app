@@ -1,9 +1,10 @@
 import React, {useContext, useEffect} from 'react';
-import {Box} from "@mui/material";
+import {Container} from "@mui/material";
 import CoachingTimeTable from "../../components/crm/coach/CoachingTimeTable";
 import {CoachingContext} from "../../context/CoachingContext";
 import {CoachingTimeTableContext} from "../../context/CoachingTimeTableContext";
 import {observer} from "mobx-react-lite";
+import PageContentItem from "../../components/UI/page-content/PageContentItem";
 
 const CoachingTimeTableCRMPage = observer(() => {
 
@@ -20,18 +21,20 @@ const CoachingTimeTableCRMPage = observer(() => {
     }, [])
 
     return (
-        <Box
+        <Container
+            maxWidth={'xl'}
             sx={{
                 marginTop: '25px',
                 height: '100%',
                 flex: 1,
                 display: 'flex',
                 flexDirection: 'column',
-                padding: '0 50px'
             }}
         >
-            <CoachingTimeTable/>
-        </Box>
+            <PageContentItem>
+                <CoachingTimeTable/>
+            </PageContentItem>
+        </Container>
     );
 })
 

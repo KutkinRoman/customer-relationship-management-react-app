@@ -42,7 +42,7 @@ export const createColorByEvent = (event: CustomerRequestEvent) => {
         case CustomerRequestEventEnum.EXPECTING_CALL:
         case CustomerRequestEventEnum.WAIT_RESPONSE:
         case CustomerRequestEventEnum.DATE_TRANS:
-                return 'warning.main'
+            return 'warning.main'
 
     }
     return 'text.primary'

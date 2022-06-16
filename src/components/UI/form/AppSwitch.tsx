@@ -21,7 +21,7 @@ const AppSwitch: FC<AppSwitchProps> = observer(
                 label={
                     <Typography
                         variant={'body1'}
-                        color={colorTitle || 'text.primary'}
+                        color={colorTitle || 'text.secondary'}
                         minWidth={'70px'}
                     >
                         {text}
@@ -29,7 +29,7 @@ const AppSwitch: FC<AppSwitchProps> = observer(
                 }
                 control={
                     <Switch
-                        color={'secondary'}
+                        color={'primary'}
                         checked={checked}
                         onChange={event => handleOnChange(event.target.checked)}
                     />

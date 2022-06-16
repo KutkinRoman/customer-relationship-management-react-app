@@ -1,19 +1,19 @@
 import React from 'react';
-import {Box, Typography} from "@mui/material";
+import {Box} from "@mui/material";
 import classes from './Footer.module.css'
+import {SubTitle} from "../typography/Typography";
 
 const Footer = () => {
     return (
         <Box
             className={classes.footer}
             bgcolor={'background.paper'}
-            color={'text.secondary'}
+            borderTop={'1px solid'}
+            borderColor={'divider'}
         >
-            <Typography
-                variant={'subtitle2'}
-            >
+            <SubTitle>
                 © 2022, Фитнес центр Спартак
-            </Typography>
+            </SubTitle>
         </Box>
     );
 };

@@ -1,13 +1,13 @@
 import React, {FC} from "react";
 import classes from './index.module.css'
-import {Box, Button, Divider, IconButton, PaletteMode, Typography} from "@mui/material";
+import {Box, Button, Divider, IconButton, PaletteMode} from "@mui/material";
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import AppModeSwitch from "../swith/AppModeSwitch";
+import {Heading} from "../typography/Typography";
 
 interface CalendarHeaderProps {
-    mode: PaletteMode,
-    changeMode: () => void,
+    mode?: PaletteMode,
+    changeMode?: () => void,
     handlePrevMonth: () => void,
     handleNextMonth: () => void,
     handleReset: () => void,
@@ -33,12 +33,9 @@ const CalendarHeader: FC<CalendarHeaderProps> =
                 <Box
                     className={classes.title}
                 >
-                    <Typography
-                        variant={'h6'}
-                        color={'primary.main'}
-                    >
+                    <Heading>
                         {title}
-                    </Typography>
+                    </Heading>
                 </Box>
                 <Divider/>
                 <Box
@@ -48,7 +45,7 @@ const CalendarHeader: FC<CalendarHeaderProps> =
                         className={classes.todayButton}
                     >
                         <Button
-                            variant={'contained'}
+                            variant={'outlined'}
                             sx={{borderRadius: '16px'}}
                             onClick={handleReset}
                         >
@@ -58,12 +55,9 @@ const CalendarHeader: FC<CalendarHeaderProps> =
                     <Box
                         className={classes.monthText}
                     >
-                        <Typography
-                            variant={'subtitle2'}
-                            color={'primary.main'}
-                        >
+                        <Heading>
                             {currentMonthTextFormat}
-                        </Typography>
+                        </Heading>
                     </Box>
                     <Box
                         className={classes.monthButtons}
@@ -86,10 +80,6 @@ const CalendarHeader: FC<CalendarHeaderProps> =
                             />
                         </IconButton>
                     </Box>
-                    <AppModeSwitch
-                        mode={mode}
-                        changeMode={changeMode}
-                    />
                 </Box>
             </Box>
         );

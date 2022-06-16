@@ -217,7 +217,6 @@ const ConversationMessageItem: FC<ConversationMessageItemProps> = observer(
                                     }
                                     <AppIconButton
                                         tooltipTitle={'Сохранить'}
-                                        color={'success'}
                                         disabled={!message.isEdit}
                                         onClick={() => store.saveMessage(message)}
                                     >

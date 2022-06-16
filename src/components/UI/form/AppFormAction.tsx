@@ -9,8 +9,8 @@ const AppFormAction: FC<AppFormActionProps> = ({children}) => {
     return (
         <Box
             borderRadius={'16px'}
-            padding={'5px'}
-            margin={'5px'}
+            padding={'10px'}
+            margin={'15px'}
         >
             {children}
         </Box>

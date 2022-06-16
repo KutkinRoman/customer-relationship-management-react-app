@@ -1,10 +1,11 @@
-import React, {FC} from 'react';
+import React, {FC, useMemo} from 'react';
 import {IAppNavItem} from "../../../router/AppNavItem";
 import {Box, Button} from "@mui/material";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PopupState, {bindMenu, bindTrigger} from 'material-ui-popup-state';
-
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import {useLocation} from 'react-router-dom'
 
 interface NavBarItemProps {
     item: IAppNavItem,
@@ -16,6 +17,12 @@ const NavBarItem: FC<NavBarItemProps> =
          item,
          handleOnClickItem
      }) => {
+
+        const location = useLocation()
+
+        const isPath = useMemo(() => {
+            return item.indexPath && location.pathname.startsWith(item.getPathName())
+        }, [location.pathname])
 
         return (
             <React.Fragment>
@@ -30,7 +37,14 @@ const NavBarItem: FC<NavBarItemProps> =
                                     {...bindTrigger(popupState)}
                                     sx={{minWidth: '100px', color: 'text.secondary'}}
                                     size={'large'}
-                                    // endIcon={<KeyboardArrowDownIcon/>}
+                                    startIcon={
+                                        isPath
+                                            ? <FiberManualRecordIcon
+                                                fontSize={'small'}
+                                                color={'primary'}
+                                            />
+                                            : ''
+                                    }
                                 >
                                     {item.title}
                                 </Button>
@@ -53,6 +67,14 @@ const NavBarItem: FC<NavBarItemProps> =
                         )}
                     </PopupState>
                     : <Button
+                        startIcon={
+                            isPath
+                                ? <FiberManualRecordIcon
+                                    fontSize={'small'}
+                                    color={'primary'}
+                                />
+                                : ''
+                        }
                         sx={{minWidth: '100px', color: 'text.secondary'}}
                         size={'large'}
                         onClick={() => handleOnClickItem(item)}

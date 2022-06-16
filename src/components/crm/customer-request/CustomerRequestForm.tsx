@@ -70,26 +70,29 @@ const PersonData: FC<CustomerRequestFormProps> = ({formStore}) => {
             <AppFormAction>
                 <AppButtonGroup>
                     <AppButton
+                        variant={'text'}
                         onClick={handleFormByPerson}
                     >
                         Редактировать персональные данные
                     </AppButton>
-                    <AppButton>
+                    <AppButton
+                        variant={'text'}
+                    >
                         <Link
                             component={'a'}
                             href={formStore.customerRequest?.person.info.pageLinkVk}
                             target={'_blank'}
-                            color={'text.primary'}
                         >
                             Перейди на страницу ВКОНТАКТЕ
                         </Link>
                     </AppButton>
-                    <AppButton>
+                    <AppButton
+                        variant={'text'}
+                    >
                         <Link
                             component={'a'}
                             href={formStore.customerRequest?.person.info.dialogLinkVk}
                             target={'_blank'}
-                            color={'text.primary'}
                         >
                             Перейди в диалог ВКОНТАКТЕ
                         </Link>

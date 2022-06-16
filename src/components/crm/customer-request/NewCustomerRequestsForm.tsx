@@ -69,7 +69,7 @@ const NewCustomerRequestsForm = () => {
                 <Link
                     href={'https://regvk.com/id/'}
                     target={'_blank'}
-                    color={'warning.main'}
+                    color={'primary.main'}
                 >
                     Как узнать ID ВКонтакте ?
                 </Link>

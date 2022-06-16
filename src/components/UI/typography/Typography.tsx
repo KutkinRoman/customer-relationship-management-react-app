@@ -9,18 +9,6 @@ interface Props {
     sx?: SxProps<Theme>;
 }
 
-export const SubTitle: FC<Props> = (props) => {
-    return (
-        <Typography
-            variant={'subtitle2'}
-            color={props.color || 'text.secondary'}
-            sx={props.sx}
-        >
-            {props.children}
-        </Typography>
-    );
-};
-
 export const Heading: FC<Props> = (props) => {
     return (
         <Typography
@@ -33,10 +21,22 @@ export const Heading: FC<Props> = (props) => {
     );
 };
 
+export const SubTitle: FC<Props> = (props) => {
+    return (
+        <Typography
+            variant={'subtitle2'}
+            color={props.color || 'text.secondary'}
+            sx={props.sx}
+        >
+            {props.children}
+        </Typography>
+    );
+};
+
 export const Body: FC<Props> = (props) => {
     return (
         <Typography
-            variant={'body2'}
+            variant={'subtitle2'}
             color={props.color || 'text.secondary'}
             sx={props.sx}
         >
