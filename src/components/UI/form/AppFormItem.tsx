@@ -14,6 +14,7 @@ const AppFormItem: FC<AppFormItemProps> = ({children, title}) => {
             bgcolor={'input.container'}
             padding={'10px'}
             margin={'15px'}
+            boxShadow={2}
         >
             {title &&
                 <SubTitle>

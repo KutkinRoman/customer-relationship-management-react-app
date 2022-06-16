@@ -104,10 +104,10 @@ export class ThemeUtils {
     }
 
     public static darkPalette() {
-        return new DarkPalette(colors[0])
+        return new DarkPalette(colors[1])
     }
 
     public static lightPalette() {
-        return new LightPalette(colors[0])
+        return new LightPalette(colors[1])
     }
 }

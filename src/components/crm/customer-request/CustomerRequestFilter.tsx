@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useContext} from 'react';
 import {CustomerRequestFilterStore} from "../../../store/customer-request/CustomerRequestFilterStore";
 import {Box, Checkbox, FormControlLabel, Typography} from "@mui/material";
 import {CustomerRequestEventCheckBox} from "../../../model/customer/CustomerRequestEvent";
@@ -11,6 +11,7 @@ import CustomerRequestEventColorPicker from "./CustomerRequestEventColorPicker";
 import ViewListIcon from '@mui/icons-material/ViewList';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import AppIconButton from "../../UI/button/AppIconButton";
+import {CustomerRequestEventColorContext} from "../../../context/CustomerRequestEventColorContext";
 
 interface CustomerRequestFilterItemProps {
     children: React.ReactNode
@@ -40,6 +41,8 @@ const CustomerRequestFilter: FC<CustomerRequestFilterProps> = observer(
          fetchFilter,
          reset
      }) => {
+
+        const colorStore = useContext(CustomerRequestEventColorContext)
 
         const handleChange = (event: CustomerRequestEventCheckBox, checked: boolean) => {
             event.setIsChecked(checked)
@@ -72,31 +75,41 @@ const CustomerRequestFilter: FC<CustomerRequestFilterProps> = observer(
                     {filter.events.map(event =>
                         <Box
                             key={`customerRequestEvent_${event.value}`}
-                            display={'flex'}
+                            bgcolor={colorStore.getBackgroundColorByEvent(event.value)}
+                            borderRadius={'5px'}
                         >
-                            <CustomerRequestEventColorPicker
-                                event={event.value}
-                            />
-                            <FormControlLabel
+                            <Box
+                                display={'flex'}
+                                boxShadow={1}
+                                bgcolor={'background.paper'}
+                                borderRadius={'5px'}
+                                sx={{
+                                    opacity: '0.85'
+                                }}
+                            >
+                                <CustomerRequestEventColorPicker
+                                    event={event.value}
+                                />
+                                <FormControlLabel
+                                    label={
+                                        <Typography
+                                            variant={'caption'}
+                                            color={'text.secondary'}
+                                        >
+                                            {event.title}
+                                        </Typography>
+                                    }
+                                    control={
+                                        <Checkbox
+                                            sx={{padding: '0 5px'}}
+                                            checked={event.isChecked}
+                                            onChange={(e, checked) => handleChange(event, checked)}
+                                            inputProps={{'aria-label': 'controlled'}}
+                                        />
+                                    }
 
-                                label={
-                                    <Typography
-                                        variant={'caption'}
-                                        color={'text.secondary'}
-                                    >
-                                        {event.title}
-                                    </Typography>
-                                }
-                                control={
-                                    <Checkbox
-                                        sx={{padding: '0 5px'}}
-                                        checked={event.isChecked}
-                                        onChange={(e, checked) => handleChange(event, checked)}
-                                        inputProps={{'aria-label': 'controlled'}}
-                                    />
-                                }
-
-                            />
+                                />
+                            </Box>
                         </Box>
                     )}
                     <FormControlLabel
@@ -106,7 +119,10 @@ const CustomerRequestFilter: FC<CustomerRequestFilterProps> = observer(
                                 variant={'caption'}
                                 color={'text.secondary'}
                             >
-                                ВСЕ
+                                {filter.isCheckedAll
+                                    ? 'Снять выделение'
+                                    : 'Выделить все'
+                                }
                             </Typography>
                         }
                         control={

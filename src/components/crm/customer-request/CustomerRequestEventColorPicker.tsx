@@ -14,7 +14,7 @@ interface Props {
 
 const CustomerRequestEventColorPicker: FC<Props> = observer(({event}) => {
 
-        const colorStore = useContext(CustomerRequestEventColorContext)
+    const colorStore = useContext(CustomerRequestEventColorContext)
 
         const {isOpen, handleOpen, handleClose} = useModal()
 
@@ -26,7 +26,6 @@ const CustomerRequestEventColorPicker: FC<Props> = observer(({event}) => {
                 >
                     <InvertColorsIcon
                         fontSize={'small'}
-                        sx={{color: colorStore.getColorByEvent(event)}}
                     />
                 </AppIconButton>
                 <AppModal
