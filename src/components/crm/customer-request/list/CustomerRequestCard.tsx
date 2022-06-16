@@ -59,11 +59,23 @@ const CustomerRequestCard: FC<Props> = observer(
                             </AppAvatar>
                         }
                         action={
-                            <Heading
-                                isLoading={isLoading}
+                            <Box
+                                sx={{
+                                    backgroundColor: 'background.paper',
+                                    padding: '5px',
+                                    borderRadius: '16px',
+                                    minWidth: '300px',
+                                    marginLeft: '10px',
+                                    textAlign: 'center'
+                                }}
+                                boxShadow={2}
                             >
-                                {request?.currentStatus.title}
-                            </Heading>
+                                <SubTitle
+                                    isLoading={isLoading}
+                                >
+                                    {request?.currentStatus.title}
+                                </SubTitle>
+                            </Box>
                         }
                         title={
                             <SubTitle
