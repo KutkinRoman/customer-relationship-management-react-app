@@ -1,5 +1,4 @@
 import {IColor, ICustomPalette} from "./types";
-import {makeAutoObservable} from "mobx";
 
 
 class LightPalette implements ICustomPalette {
@@ -35,6 +34,8 @@ class LightPalette implements ICustomPalette {
     setTextColor(color: string): void {
         this.textColor = color
     }
+
+
 }
 
 export {

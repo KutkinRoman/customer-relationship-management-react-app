@@ -52,6 +52,8 @@ export class AuthStore {
         } catch (e) {
             this.setIsAuth(false)
             this.user = undefined
+            localStorage.removeItem(this.accessTokenKey)
+            localStorage.removeItem(this.refreshTokenKey)
         }
     }
 

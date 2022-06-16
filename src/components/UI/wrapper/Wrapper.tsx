@@ -37,7 +37,6 @@ const Wrapper: FC<WrapperProps> = observer(({children}) => {
             />
             <BackgroundLinearGradientStyled/>
             {children}
-
             <CustomizationThemePanel/>
         </Box>
     );

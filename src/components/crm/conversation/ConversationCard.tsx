@@ -12,6 +12,7 @@ import {useMouseEnter} from "../../../hooks/useMouseEnter";
 
 interface ConversationCardProps {
     conversation?: IConversation
+    isLoading?: boolean
     initFormByConversation?: (conversation: IConversation) => void
     hover?: boolean
 }
@@ -19,6 +20,7 @@ interface ConversationCardProps {
 const ConversationCard: FC<ConversationCardProps> =
     ({
          conversation,
+         isLoading,
          initFormByConversation,
          hover
      }) => {
@@ -37,7 +39,9 @@ const ConversationCard: FC<ConversationCardProps> =
                 >
                     <CardHeader
                         avatar={
-                            <AppAvatar>
+                            <AppAvatar
+                                isLoading={isLoading}
+                            >
                                 {conversation?.conversationTitle && conversation.conversationTitle.length > 1
                                     ? conversation?.conversationTitle.substring(0, 2)
                                     : '?'
@@ -48,6 +52,7 @@ const ConversationCard: FC<ConversationCardProps> =
                             (initFormByConversation && conversation)
                             &&
                             <AppIconButton
+                                tooltipTitle={'Редактировать сообщения'}
                                 onClick={() => initFormByConversation(conversation)}
                                 color={mouseEnter ? 'primary' : 'inherit'}
                             >
@@ -55,25 +60,35 @@ const ConversationCard: FC<ConversationCardProps> =
                             </AppIconButton>
                         }
                         title={
-                            <Heading>
+                            <Heading
+                                isLoading={isLoading}
+                            >
                                 {conversation?.conversationTitle || '?'}
                             </Heading>
                         }
                         subheader={
-                            <SubTitle>
+                            <SubTitle
+                                isLoading={isLoading}
+                            >
                                 {conversation?.groupTitle}
                             </SubTitle>
                         }
                     />
                     <AppDivider/>
                     <CardContent>
-                        <SubTitle>
+                        <SubTitle
+                            isLoading={isLoading}
+                        >
                             ID группы: {conversation?.groupId}
                         </SubTitle>
-                        <SubTitle>
+                        <SubTitle
+                            isLoading={isLoading}
+                        >
                             ID беседы: {conversation?.peerId}
                         </SubTitle>
-                        <SubTitle>
+                        <SubTitle
+                            isLoading={isLoading}
+                        >
                             Сообщения: {conversation?.messages.length}
                         </SubTitle>
                     </CardContent>
@@ -81,6 +96,7 @@ const ConversationCard: FC<ConversationCardProps> =
                     <CardContent>
                         <SubTitle
                             color={conversation?.isUnavailable ? 'secondary.main' : 'error.main'}
+                            isLoading={isLoading}
                         >
                             Беседа{conversation?.isUnavailable ? ' доступна ' : ' недоступна '}для отправки сообщений
                         </SubTitle>

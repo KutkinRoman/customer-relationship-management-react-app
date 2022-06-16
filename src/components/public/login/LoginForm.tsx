@@ -1,4 +1,4 @@
-import React, {FC, useContext, useState} from 'react';
+import React, {FC, useContext, useEffect, useState} from 'react';
 import {useForm} from "react-hook-form";
 import {Valid} from "../../../utils/ValidationUtils";
 import AppFormItem from "../../UI/form/AppFormItem";
@@ -33,6 +33,13 @@ const LoginForm: FC = () => {
             setIsLoading(false)
         }
     }
+
+    useEffect(() => {
+        if (process.env.REACT_APP_PROFILE === 'development') {
+            loginForm.setValue('username', process.env.REACT_APP_DEV_USERNAME)
+            loginForm.setValue('password', process.env.REACT_APP_DEV_PASSWORD)
+        }
+    }, [])
 
     return (
         <form

@@ -29,6 +29,10 @@ export class UserPalette implements ICustomPalette {
         this.warningColor = palette.warningColor;
     }
 
+    setMode(mode: PaletteMode): void {
+        this.mode = mode
+    }
+
     setPrimaryColor(color: string): void {
         this.primaryColor = color
     }
@@ -44,6 +48,5 @@ export class UserPalette implements ICustomPalette {
     setTextColor(color: string): void {
         this.textColor = color
     }
-
 
 }

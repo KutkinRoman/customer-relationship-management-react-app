@@ -25,13 +25,11 @@ class CustomTheme implements ICustomTheme {
     lightTheme() {
         this.palette = ThemeUtils.lightPalette()
         this.theme = ThemeUtils.createTheme(this.palette)
-        this.isUserTheme = false
     }
 
     darkTheme() {
         this.palette = ThemeUtils.darkPalette()
         this.theme = ThemeUtils.createTheme(this.palette)
-        this.isUserTheme = false
     }
 
     update() {
@@ -90,6 +88,10 @@ class CustomTheme implements ICustomTheme {
             this.lightTheme()
         }
         this.isUpdate = false
+    }
+
+    private compareAndConvertPalettes(src: ICustomPalette, target: ICustomPalette) {
+
     }
 
 }

@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Container, Grid, LinearProgress} from "@mui/material";
+import {Container, Grid} from "@mui/material";
 import {ConversationStore} from "../../store/conversation/ConversationStore";
 import ConversationCard from "../../components/crm/conversation/ConversationCard";
 import {observer} from "mobx-react-lite";
@@ -46,18 +46,29 @@ const ConversationsPage = observer(() => {
             <Container
                 sx={{marginTop: '50px'}}
             >
-                {conversationStore.isLoading &&
-                    <LinearProgress
-                        color={'primary'}
-                    />
-                }
                 <Grid
                     container
                     spacing={2}
                 >
+                    {conversationStore.isLoading &&
+                        [...new Array(2)].map(() =>
+                            <Grid
+                                item
+                                xs={12}
+                                md={6}
+                                key={`conversationCardSkeleton_${Math.random()}`}
+                            >
+                                <ConversationCard
+                                    isLoading={true}
+                                />
+                            </Grid>
+                        )
+                    }
                     {conversationStore.data?.map(conversation =>
                         <Grid
-                            item xs={12} md={6}
+                            item
+                            xs={12}
+                            md={6}
                             key={`conversationCard_${conversation.id}`}
                         >
                             <ConversationCard
