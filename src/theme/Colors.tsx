@@ -1,4 +1,5 @@
-import {IColor} from "./types";
+import {IColor} from './types';
+import {CustomerRequestEventEnum} from '../model/customer/CustomerRequestEvent';
 
 export const colors: IColor[] = [
     {
@@ -19,5 +20,22 @@ export const colors: IColor[] = [
     },
 ]
 
-
+export const defaultRequestEventsColor = () => {
+    const map = new Map<CustomerRequestEventEnum, string>()
+    map.set(CustomerRequestEventEnum.VISIT_PLANNED, 'rgba(11, 176, 11, 0.78)')
+    map.set(CustomerRequestEventEnum.DATE_TRANS, 'rgba(152, 42, 42, 0.8)')
+    map.set(CustomerRequestEventEnum.CREATE, 'rgba(201, 204, 27, 0.81)')
+    map.set(CustomerRequestEventEnum.CLOSE, 'rgba(115, 107, 107, 0.88)')
+    map.set(CustomerRequestEventEnum.ERROR_QUESTION_SEND, 'rgba(235, 172, 172, 1)')
+    map.set(CustomerRequestEventEnum.VISIT, 'rgba(141, 20, 163, 0.75)')
+    map.set(CustomerRequestEventEnum.REMIND_CALL, 'rgba(198, 204, 33, 0.83)')
+    map.set(CustomerRequestEventEnum.EXPECTING_CALL, 'rgba(191, 203, 33, 0.81)')
+    map.set(CustomerRequestEventEnum.NEGATIVE, 'rgba(183, 38, 38, 0.82)')
+    map.set(CustomerRequestEventEnum.SUCCESS, 'rgba(36, 181, 199, 0.8)')
+    map.set(CustomerRequestEventEnum.QUESTION_NOT_SEND, 'rgba(244, 180, 180, 1)')
+    map.set(CustomerRequestEventEnum.WAIT_RESPONSE, 'rgba(168, 76, 76, 0.81)')
+    map.set(CustomerRequestEventEnum.BE_CONFIRMED_ID, 'rgba(248, 178, 178, 1)')
+    map.set(CustomerRequestEventEnum.EMPTY_ID, 'rgba(237, 172, 172, 1)')
+    return map
+} 
 

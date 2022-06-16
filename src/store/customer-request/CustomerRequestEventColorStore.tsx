@@ -1,6 +1,7 @@
 import {CustomerRequestEventEnum} from "../../model/customer/CustomerRequestEvent";
 import {makeAutoObservable} from "mobx";
 import {authStore} from "../../index";
+import {defaultRequestEventsColor} from "../../theme/Colors";
 
 export class CustomerRequestEventColorStore {
 
@@ -9,7 +10,7 @@ export class CustomerRequestEventColorStore {
     isUpdate: boolean
 
     constructor() {
-        this.mapColors = new Map<CustomerRequestEventEnum, string>();
+        this.mapColors = defaultRequestEventsColor()
         this.isUpdate = false
         makeAutoObservable(this)
     }

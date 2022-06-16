@@ -90,10 +90,6 @@ class CustomTheme implements ICustomTheme {
         this.isUpdate = false
     }
 
-    private compareAndConvertPalettes(src: ICustomPalette, target: ICustomPalette) {
-
-    }
-
 }
 
 export {
