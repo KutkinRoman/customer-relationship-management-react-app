@@ -28,6 +28,12 @@ export class CustomerRequestEventColorStore {
             : 'text.secondary'
     }
 
+    getBackgroundColorByEvent(event: CustomerRequestEventEnum) {
+        return this.mapColors.has(event)
+            ? this.mapColors.get(event)
+            : 'background.paper'
+    }
+
     updateColorByUserName(username: string) {
         const map = localStorage.getItem(this.keyLocalStorage + username)
         if (map) {

@@ -8,23 +8,31 @@ interface AppCardProps {
     children: React.ReactNode,
     sx?: SxProps<Theme>;
     hover?: boolean
+    onClick?: () => void
 }
 
-const AppCard: FC<AppCardProps> = ({children, sx, hover}) => {
+const AppCard: FC<AppCardProps> =
+    ({
+         children,
+         sx,
+         hover,
+         onClick
+     }) => {
 
-    const {mouseEnter, onMouseEnter, onMouseLeave} = useMouseEnter()
-    
-    return (
-        <Box
-            bgcolor={'background.paper'}
-            sx={{...sx, borderRadius: '16px'}}
-            boxShadow={(hover && mouseEnter) ? 22 : 1}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-        >
-            {children}
-        </Box>
-    );
-};
+        const {mouseEnter, onMouseEnter, onMouseLeave} = useMouseEnter()
+
+        return (
+            <Box
+                bgcolor={'background.paper'}
+                sx={{...sx, borderRadius: '16px'}}
+                boxShadow={(hover && mouseEnter) ? 22 : 1}
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
+                onClick={onClick}
+            >
+                {children}
+            </Box>
+        );
+    };
 
 export default AppCard;

@@ -37,7 +37,10 @@ const AppAvatar: FC<AppAvatarProps> =
                             height: size
                         }}
                     >
-                        {children}
+                        {children && children.toString().length > 1
+                            ? children.toString()?.substring(0, 2)
+                            : '?'
+                        }
                     </Avatar>
                 }
             </React.Fragment>

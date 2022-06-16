@@ -12,6 +12,7 @@ export class CustomerRequestFilterStore {
     callDateRange: DateRange<Date>
     events: CustomerRequestEventCheckBox[]
     isCheckedAll: boolean
+    mode: 'list' | 'table';
 
     constructor() {
         this.page = 1
@@ -20,6 +21,7 @@ export class CustomerRequestFilterStore {
         this.callDateRange = [null, null]
         this.events = []
         this.isCheckedAll = true
+        this.mode = 'list'
         makeAutoObservable(this)
     }
 
@@ -61,11 +63,11 @@ export class CustomerRequestFilterStore {
             page: this.page,
             event: this.getParamEvents(),
             startCreateDate: DateTimeUtils.toISODateString(this.createDateRange[0]),
-            endCreateDate:  DateTimeUtils.toISODateString(this.createDateRange[1]),
-            startPlanDate:  DateTimeUtils.toISODateString(this.planDateRange[0]),
-            endPlanDate:  DateTimeUtils.toISODateString(this.planDateRange[1]),
-            startCallDate:  DateTimeUtils.toISODateString(this.callDateRange[0]),
-            endCallDate:  DateTimeUtils.toISODateString(this.callDateRange[1])
+            endCreateDate: DateTimeUtils.toISODateString(this.createDateRange[1]),
+            startPlanDate: DateTimeUtils.toISODateString(this.planDateRange[0]),
+            endPlanDate: DateTimeUtils.toISODateString(this.planDateRange[1]),
+            startCallDate: DateTimeUtils.toISODateString(this.callDateRange[0]),
+            endCallDate: DateTimeUtils.toISODateString(this.callDateRange[1])
         }
     }
 
@@ -76,4 +78,7 @@ export class CustomerRequestFilterStore {
             : null
     }
 
+    setMode(mode: 'list' | 'table') {
+        this.mode = mode
+    }
 }

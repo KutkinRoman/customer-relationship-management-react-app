@@ -73,7 +73,7 @@ export class ThemeUtils {
                         default: palette.backgroundColor,
                         paper: ColorUtils.transparentRGBA(palette.backgroundColor, 0.98),
                         // @ts-ignore
-                        linearGradient: `linear-gradient(${ColorUtils.transparentRGBA(palette.backgroundColor, 0.5)} 0%, ${palette.textColor} 75%)`
+                        linearGradient: `linear-gradient(${ColorUtils.transparentRGBA(palette.backgroundColor, 0.2)} 0%, ${ColorUtils.darkerColor(palette.textColor, 0.2)} 75%)`
                     },
 
                     divider: ColorUtils.transparentRGBA(palette.textColor, 0.09),

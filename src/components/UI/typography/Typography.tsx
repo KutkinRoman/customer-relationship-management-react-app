@@ -23,6 +23,8 @@ export const Heading: FC<Props> = (props) => {
                     animation={'wave'}
                 />
                 : props.children
+                    ? props.children
+                    : '.'
             }
         </Typography>
     );
@@ -41,6 +43,8 @@ export const SubTitle: FC<Props> = (props) => {
                     animation={'wave'}
                 />
                 : props.children
+                    ? props.children
+                    : '.'
             }
         </Typography>
     );
@@ -59,6 +63,8 @@ export const Body: FC<Props> = (props) => {
                     animation={'wave'}
                 />
                 : props.children
+                    ? props.children
+                    : '.'
             }
         </Typography>
     );
@@ -77,6 +83,8 @@ export const Caption: FC<Props> = (props) => {
                     animation={'wave'}
                 />
                 : props.children
+                    ? props.children
+                    : '.'
             }
         </Typography>
     );

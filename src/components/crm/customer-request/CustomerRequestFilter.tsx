@@ -8,6 +8,9 @@ import AppButton from "../../UI/button/AppButton";
 import AppButtonGroup from "../../UI/button/AppButtonGroup";
 import AppDateRangePickerSmall from "../../UI/date-time-picker/AppDateRangePickerSmall";
 import CustomerRequestEventColorPicker from "./CustomerRequestEventColorPicker";
+import ViewListIcon from '@mui/icons-material/ViewList';
+import TableChartIcon from '@mui/icons-material/TableChart';
+import AppIconButton from "../../UI/button/AppIconButton";
 
 interface CustomerRequestFilterItemProps {
     children: React.ReactNode
@@ -121,18 +124,44 @@ const CustomerRequestFilter: FC<CustomerRequestFilterProps> = observer(
                 <CustomerRequestFilterItem>
                     <AppButtonGroup>
                         <AppButton
+                            size={'small'}
                             fullWidth={true}
                             onClick={reset}
                         >
                             Сбросить
                         </AppButton>
                         <AppButton
+                            size={'small'}
                             fullWidth={true}
                             onClick={fetchFilter}
                         >
                             Фильтр
                         </AppButton>
                     </AppButtonGroup>
+                </CustomerRequestFilterItem>
+                <CustomerRequestFilterItem>
+                    <Box
+                        textAlign={'end'}
+                    >
+                        <AppIconButton
+                            tooltipTitle={'Список'}
+                            color={filter.mode === 'list' ? 'primary' : 'inherit'}
+                            onClick={() => filter.setMode('list')}
+                        >
+                            <ViewListIcon
+                                fontSize={'small'}
+                            />
+                        </AppIconButton>
+                        <AppIconButton
+                            tooltipTitle={'Таблица'}
+                            color={filter.mode === 'table' ? 'primary' : 'inherit'}
+                            onClick={() => filter.setMode('table')}
+                        >
+                            <TableChartIcon
+                                fontSize={'small'}
+                            />
+                        </AppIconButton>
+                    </Box>
                 </CustomerRequestFilterItem>
             </Box>
         );

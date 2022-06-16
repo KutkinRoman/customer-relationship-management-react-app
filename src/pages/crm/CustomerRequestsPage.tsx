@@ -2,13 +2,14 @@ import React, {FC, useEffect, useState} from 'react';
 import {Box, Container, Pagination} from "@mui/material";
 import PageContentItem from "../../components/UI/page-content/PageContentItem";
 import {CustomerRequestStore} from "../../store/customer-request/CustomerRequestStore";
-import CustomerRequestTable from "../../components/crm/customer-request/CustomerRequestTable";
 import {observer} from "mobx-react-lite";
 import CustomerRequestFilter from "../../components/crm/customer-request/CustomerRequestFilter";
 import useModal from "../../hooks/useModal";
 import {ICustomerRequest} from "../../model/customer/CustomerRequest";
 import CustomerRequestDialog from "../../components/crm/customer-request/CustomerRequestModal";
 import {CustomerRequestFormStore} from "../../store/customer-request/CustomerRequestFormStore";
+import CustomerRequestList from "../../components/crm/customer-request/list/CustomerRequestList";
+import CustomerRequestTable from "../../components/crm/customer-request/CustomerRequestTable";
 
 const CustomerRequestsPage: FC = observer(() => {
 
@@ -88,15 +89,25 @@ const CustomerRequestsPage: FC = observer(() => {
                             color={'primary'}
                         />
                     </Box>
-                    <PageContentItem
-                        sx={{height: '100%'}}
-                    >
-                        <CustomerRequestTable
+                    {customerRequestStore.filter.mode === 'table' &&
+                        <PageContentItem
+                            sx={{height: '100%'}}
+                        >
+                            <CustomerRequestTable
+                                requests={customerRequestStore.data?.content || []}
+                                isLoading={customerRequestStore.isLoading}
+                                handleClickTableRow={handleClickTableRow}
+                            />
+                        </PageContentItem>
+                    }
+                    {customerRequestStore.filter.mode === 'list' &&
+                        <CustomerRequestList
                             requests={customerRequestStore.data?.content || []}
                             isLoading={customerRequestStore.isLoading}
-                            handleClickTableRow={handleClickTableRow}
+                            handleClickCard={handleClickTableRow}
                         />
-                    </PageContentItem>
+                    }
+
                     <Box
                         display={'flex'}
                         justifyContent={'center'}

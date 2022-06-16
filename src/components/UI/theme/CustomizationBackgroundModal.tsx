@@ -21,7 +21,7 @@ const CustomizationBackgroundModal: FC<Props> = observer(({handleClosePanel}) =>
     const auth = useContext(AuthContext)
     const imageContext = useContext(ImageContext)
     const {isOpen, handleOpen, handleClose} = useModal()
-    const {read, file, result, clear} = useReader()
+    const {read, result, clear} = useReader()
 
     const onDrop = (files: File[]) => {
         read(files[0])
@@ -33,7 +33,7 @@ const CustomizationBackgroundModal: FC<Props> = observer(({handleClosePanel}) =>
         if (result) {
             imageContext.setBackgroundImage(result)
         }
-        if (result && auth?.isAuth && auth.user) {
+        if (auth?.user) {
             imageContext.saveBackgroundImageByUsernameId(auth.user.username, result)
         }
     }

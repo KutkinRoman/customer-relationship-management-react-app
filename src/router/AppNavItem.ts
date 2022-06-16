@@ -37,7 +37,7 @@ class AppNavItem implements IAppNavItem {
 const publicNavItems: IAppNavItem[] = [
     // new AppNavItem('HOME', null, AppPaths.index, null),
     // new AppNavItem('Вход', null, AppPaths.login, null),
-    // new AppNavItem('График тренировок', null, AppPaths.coachingTimeTable, null)
+    new AppNavItem('', null, AppPaths.coachingTimeTable, '', null)
 ]
 
 const CRMNavItems: IAppNavItem[] = [

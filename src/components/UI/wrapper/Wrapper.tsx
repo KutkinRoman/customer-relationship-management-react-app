@@ -5,6 +5,7 @@ import {styled} from "@mui/material/styles";
 import CustomizationThemePanel from "../theme/CustomizationThemePanel";
 import {ImageContext} from "../../../context/ImageContext";
 import {observer} from "mobx-react-lite";
+import Iframe from "react-iframe";
 
 interface WrapperProps {
     children: React.ReactNode

@@ -9,6 +9,7 @@ import AppCard from "../../UI/page-content/AppCard";
 import {Heading, SubTitle} from "../../UI/typography/Typography";
 import AppAvatar from "../../UI/avatar/AppAvatar";
 import {useMouseEnter} from "../../../hooks/useMouseEnter";
+import randomAvatarColor from "../../../utils/AvatarUtils";
 
 interface ConversationCardProps {
     conversation?: IConversation
@@ -27,6 +28,11 @@ const ConversationCard: FC<ConversationCardProps> =
 
         const {mouseEnter, onMouseEnter, onMouseLeave} = useMouseEnter()
 
+        function handleOnClickEdit() {
+            if (initFormByConversation && conversation) {
+                initFormByConversation(conversation)
+            }
+        }
 
         return (
             <Box
@@ -49,12 +55,11 @@ const ConversationCard: FC<ConversationCardProps> =
                             </AppAvatar>
                         }
                         action={
-                            (initFormByConversation && conversation)
-                            &&
                             <AppIconButton
+                                disabled={!initFormByConversation || !conversation || isLoading || !mouseEnter}
                                 tooltipTitle={'Редактировать сообщения'}
-                                onClick={() => initFormByConversation(conversation)}
-                                color={mouseEnter ? 'primary' : 'inherit'}
+                                onClick={handleOnClickEdit}
+                                color={'primary'}
                             >
                                 <EditIcon/>
                             </AppIconButton>
