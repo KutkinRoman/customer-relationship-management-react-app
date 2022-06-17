@@ -70,14 +70,10 @@ export class AuthStore {
     }
 
     public async logout() {
-        try {
-            await AuthService.logout()
-        } finally {
-            localStorage.removeItem(this.accessTokenKey)
-            localStorage.removeItem(this.refreshTokenKey)
-            this.setIsAuth(false)
-            this.user = undefined
-        }
+        this.setIsAuth(false)
+        this.user = undefined
+        localStorage.removeItem(this.accessTokenKey)
+        localStorage.removeItem(this.refreshTokenKey)
     }
 
 }

@@ -1,14 +1,13 @@
 import {styled} from "@mui/material/styles";
-import {Box, Fab} from "@mui/material";
+import {Box, BoxProps, Fab} from "@mui/material";
 
-const CustomizationThemePanelPaper = styled(Box)(({theme}) => ({
+const CustomizationThemePanelPaper = styled(Box)<BoxProps>(({theme}) => ({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: theme.palette.background.paper,
 }))
-
 
 const CustomizationThemePanelHeader = styled(Box)(({theme}) => ({
     padding: '10px',
