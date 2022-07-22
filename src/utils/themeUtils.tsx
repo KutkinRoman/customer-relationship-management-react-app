@@ -97,9 +97,10 @@ export class ThemeUtils {
                             size: 'small',
                         },
                     },
+
                     MuiFilledInput: {
                         defaultProps: {
-                            margin: 'dense',
+                            margin: 'dense'
                         },
                     },
                     MuiFormControl: {

@@ -146,11 +146,11 @@ const RequestCoaching: FC<CustomerRequestFormProps> = ({formStore}) => {
     }
 
     function handleOnSubmit(data: any) {
-        setFormData({...data})
         if (formStore.customerRequest?.person.info.isOutMessage) {
+            setFormData({...data})
             handleOpen()
         } else {
-            setFormData({...formData, isOutMessage: false})
+            setFormData({...data, isOutMessage: false})
         }
     }
 
@@ -172,11 +172,8 @@ const RequestCoaching: FC<CustomerRequestFormProps> = ({formStore}) => {
         }
     }, [formData])
 
-
     return (
-        <form
-            onSubmit={handleSubmit(handleOnSubmit)}
-        >
+        <form onSubmit={handleSubmit(handleOnSubmit)}>
             <PageContentItem>
                 <AppFormHeader
                     text={'Дата и время тренировки'}
