@@ -7,8 +7,7 @@
 }
 
 .calendar {
-    height: 100%;
-    flex: 1;
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
 }
@@ -72,10 +71,8 @@
 
 .day {
     flex: 1;
-    margin: 2px;
     border: solid 1px;
     position: relative;
-    border-radius: 10px;
 }
 
 .todayBadge {
@@ -109,10 +106,9 @@
 
 .dayItem {
     padding: 2px;
-    margin-bottom: 2px;
     display: flex;
     flex-direction: row;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .dayItemContent {

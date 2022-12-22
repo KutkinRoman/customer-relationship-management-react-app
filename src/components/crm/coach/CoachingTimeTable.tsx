@@ -55,6 +55,7 @@ const CoachingDayItem: FC<CoachingDayItemProps> = observer(({day, updateDays, ha
         <Box
             onClick={() => handleOnClick(day, sessions)}
             height={'100%'}
+            style={{cursor: 'pointer'}}
         >
             {isLoading &&
                 <DaySkeleton/>
@@ -169,7 +170,6 @@ const CoachingSideBar: FC<CoachingSideBarProps> = observer(({updateMonth, curren
         </React.Fragment>
     )
 })
-
 
 const CoachingTimeTable: FC = observer(() => {
 

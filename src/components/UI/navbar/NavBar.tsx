@@ -10,6 +10,7 @@ import {AppBarStyled} from "./styles";
 import AppModeSwitch from "../swith/AppModeSwitch";
 import {CustomThemeContext} from "../../../context/CustomThemeContext";
 import {observer} from "mobx-react-lite";
+import AppDrawer from "./AppDrawer";
 
 interface NavBarProps {
     items: IAppNavItem[]
@@ -45,10 +46,9 @@ const NavBar: FC<NavBarProps> = observer(({items}) => {
     return (
         <HideOnScroll>
             <AppBarStyled>
-                <Container
-                    maxWidth={'xl'}
-                >
+                <Container maxWidth={'xl'}>
                     <Toolbar>
+                        {/*<AppDrawer items={items}/>*/}
                         {items.map(item =>
                             <NavBarItem
                                 key={`navItem_${item.path}`}

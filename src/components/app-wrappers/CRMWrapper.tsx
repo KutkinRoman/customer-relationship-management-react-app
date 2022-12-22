@@ -19,10 +19,8 @@ const CRMWrapper: FC = () => {
                 <CoachingTimeTableContextProvider>
                     <CoachContextProvider>
                         <CustomerRequestEventColorContextProvider>
-                            <Wrapper>
-                                <NavBar
-                                    items={CRMNavItems}
-                                />
+                            <Wrapper isShowCustomThemePanel>
+                                <NavBar items={CRMNavItems}/>
                                 <PageContent>
                                     <Routes>
                                         {CRMRoutes.map(route =>

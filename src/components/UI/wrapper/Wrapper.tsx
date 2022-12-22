@@ -9,6 +9,7 @@ import Iframe from "react-iframe";
 
 interface WrapperProps {
     children: React.ReactNode
+    isShowCustomThemePanel?: boolean
 }
 
 const BackgroundLinearGradientStyled = styled(Box)(({theme}) => ({
@@ -22,7 +23,7 @@ const BackgroundLinearGradientStyled = styled(Box)(({theme}) => ({
     background: theme.palette.background.linearGradient,
 }))
 
-const Wrapper: FC<WrapperProps> = observer(({children}) => {
+const Wrapper: FC<WrapperProps> = observer(({children, isShowCustomThemePanel}) => {
 
     const imageContext = useContext(ImageContext)
 
@@ -38,7 +39,7 @@ const Wrapper: FC<WrapperProps> = observer(({children}) => {
             />
             <BackgroundLinearGradientStyled/>
             {children}
-            <CustomizationThemePanel/>
+            {isShowCustomThemePanel && <CustomizationThemePanel/>}
         </Box>
     );
 });

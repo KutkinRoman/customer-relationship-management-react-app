@@ -17,5 +17,10 @@ export function useFetch<T>(callback: () => Promise<AxiosResponse<T>>) {
             setLoading(false)
         }
     }
-    return [data, fetching, isLoading, error]
+    return {
+        data,
+        fetching,
+        isLoading,
+        error
+    }
 }

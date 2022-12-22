@@ -14,6 +14,10 @@ export class AppPaths {
     static readonly bot: string = 'bot';
     static readonly conversations: string = AppPaths.bot + '/conversations';
     static readonly newCustomerRequests: string = AppPaths.customerRequests + '/new';
+    static readonly employeeTimeTable = `${AppPaths.timeTable}/employee`
+
+    static readonly indexProfile: string = 'profile'
+    static readonly coachTransactions: string = 'coach-transactions'
 }
 
 export enum AppParams {

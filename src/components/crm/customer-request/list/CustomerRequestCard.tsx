@@ -214,19 +214,23 @@ const CustomerRequestCard: FC<Props> = observer(
                 <CardContent>
                     <ListItemText
                         secondary={
-                            <SubTitle
-                                isLoading={isLoading}
-                            >
+                            <SubTitle isLoading={isLoading}>
                                 {request?.person.info.pageLinkVk
                                     ?
                                     <Link
                                         href={request.person.info.pageLinkVk}
                                         target={'_blank'}
                                     >
-                                        {request.person.info.pageLinkVk}
+                                        {request.person.info.pageLinkVk + '\n'}
                                     </Link>
-                                    : '.'
+                                    : '.\n'
                                 }
+                                <Link
+                                    href={`http://spartak-fitnes.ru/profile/${request?.person.id}/orders`}
+                                    target={'_blank'}
+                                >
+                                    История покупок
+                                </Link>
                             </SubTitle>
                         }
                     />

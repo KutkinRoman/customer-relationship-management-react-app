@@ -12,7 +12,6 @@ interface AppDatePickerControllerProps extends AppTextFieldProps {
     errors: FieldErrors
 }
 
-
 const AppDatePickerController: FC<AppDatePickerControllerProps> =
     ({
          name,
@@ -41,7 +40,7 @@ const AppDatePickerController: FC<AppDatePickerControllerProps> =
                                 color={color || 'primary'}
                                 variant={variant || 'standard'}
                                 error={!!errors[name]}
-                                helperText={errors[name] ? errors[name].message || `${label} Error!` : ''}
+                                helperText={errors[name] ? errors[name].message || `${label} Error!` : undefined}
                             />
                         }
                     />

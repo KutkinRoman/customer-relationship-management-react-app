@@ -33,7 +33,7 @@ const Day: FC<DayProps> =
                     sx={{
                         // borderColor: dayIx <= 4 ? 'secondary.light' : 'primary.light',
                         borderColor: 'divider',
-                        opacity: day.month() === currentMonthNumber ? '1' : '0.1'
+                        opacity: day.month() === currentMonthNumber ? '1' : '0.4'
                     }}
                 >
                     {day.format("DD.MM.YYYY") === dayjs().format('DD.MM.YYYY') &&

@@ -6,6 +6,7 @@ export class PersonFull extends Person {
 
     id: number;
     isCoach: boolean;
+    coachId?: number;
     isEmployee: boolean;
     isCustomer: boolean;
     info: IPersonInfo;
@@ -14,6 +15,7 @@ export class PersonFull extends Person {
         super(personFull)
         this.id = personFull.id;
         this.isCoach = personFull.isCoach
+        this.coachId = personFull.coachId
         this.isEmployee = personFull.isEmployee
         this.isCustomer = personFull.isCustomer
         this.info = new PersonInfo(personFull.info);

@@ -12,6 +12,8 @@ import CustomerRequestsPage from "../pages/crm/CustomerRequestsPage";
 import NewCustomerRequestsPage from "../pages/crm/NewCustomerRequestsPage";
 import ConversationsPage from "../pages/crm/ConversationsPage";
 import CoachingTimeTableCRMPage from "../pages/crm/CoachingTimeTableCRMPage";
+import CoachTransactionsPage from "../pages/profile/CoachTransactionsPage";
+import EmployeeTimeTablePage from "../pages/crm/EmployeeTimeTablePage";
 
 interface IAppRoute {
     readonly path: string
@@ -45,12 +47,19 @@ const CRMRoutes: IAppRoute[] = [
     new AppRoute(AppPaths.newCustomerRequests, <NewCustomerRequestsPage/>),
     new AppRoute(AppPaths.conversations, <ConversationsPage/>),
     new AppRoute(AppPaths.coachingTimeTable, <CoachingTimeTableCRMPage/>),
+    new AppRoute(AppPaths.employeeTimeTable, <EmployeeTimeTablePage/>),
+    new AppRoute("/*", <NotFoundPage/>)
+]
+
+const profileRoutes: IAppRoute[] = [
+    new AppRoute( '/:' + AppParams.personId + '/' + AppPaths.coachTransactions, <CoachTransactionsPage/>),
     new AppRoute("/*", <NotFoundPage/>)
 ]
 
 export {
     publicRoutes,
-    CRMRoutes
+    CRMRoutes,
+    profileRoutes
 };
 
 export type {IAppRoute};

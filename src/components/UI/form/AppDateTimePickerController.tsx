@@ -24,28 +24,27 @@ const AppDateTimePickerController: FC<AppDateTimePickerControllerProps> =
      }) => {
 
         return (
-                <Controller
-                    name={name}
-                    control={control}
-                    render={({field: {onChange, value}}) =>
-                        <MobileDateTimePicker
-                            label={label}
-                            value={value}
-                            onChange={onChange}
-                            renderInput={(params) =>
-                                <TextField
-                                    fullWidth={fullWidth || true}
-                                    color={color || 'primary'}
-                                    variant={variant || 'standard'}
-                                    error={!!errors[name]}
-                                    helperText={errors[name] ? errors[name].message || `${label} Error!` : ''}
-                                    {...params}
-                                />
-                            }
-                        />
-
-                    }
-                />
+            <Controller
+                name={name}
+                control={control}
+                render={({field: {onChange, value}}) =>
+                    <MobileDateTimePicker
+                        label={label}
+                        value={value}
+                        onChange={onChange}
+                        renderInput={(params) =>
+                            <TextField
+                                fullWidth={fullWidth || true}
+                                color={color || 'primary'}
+                                variant={variant || 'standard'}
+                                error={!!errors[name]}
+                                helperText={errors[name] ? errors[name].message || `${label} Error!` : ''}
+                                {...params}
+                            />
+                        }
+                    />
+                }
+            />
         );
     };
 

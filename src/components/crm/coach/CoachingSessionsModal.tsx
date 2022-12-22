@@ -59,9 +59,7 @@ const CoachingSessionsModal: FC<CoachingSessionsModalProps> = observer(
                 isOpen={isOpen}
                 handleClose={handleClose}
             >
-                <Box
-                    marginBottom={'5px'}
-                >
+                <Box marginBottom={'5px'}>
                     <React.Fragment>
                         <Button
                             id="fade-button"

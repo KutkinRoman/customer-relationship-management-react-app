@@ -1,10 +1,16 @@
 import React from 'react';
-import {Container, Typography} from "@mui/material";
+import {Container} from "@mui/material";
+import {Heading} from "../../components/UI/typography/Typography";
+import AppCard from "../../components/UI/page-content/AppCard";
 
 const NotFoundPage = () => {
     return (
-        <Container>
-            <Typography color={'warning.main'}>Not Found Page</Typography>
+        <Container style={{paddingTop: '5rem'}}>
+            <AppCard sx={{padding: '1rem'}}>
+                <Heading>
+                    Страница не найдена...
+                </Heading>
+            </AppCard>
         </Container>
     );
 };

@@ -4,7 +4,6 @@ import CoachingTimeTable from "../../components/crm/coach/CoachingTimeTable";
 import {CoachingContext} from "../../context/CoachingContext";
 import {CoachingTimeTableContext} from "../../context/CoachingTimeTableContext";
 import {observer} from "mobx-react-lite";
-import PageContentItem from "../../components/UI/page-content/PageContentItem";
 
 const CoachingTimeTableCRMPage = observer(() => {
 
@@ -31,9 +30,7 @@ const CoachingTimeTableCRMPage = observer(() => {
                 flexDirection: 'column',
             }}
         >
-            <PageContentItem>
-                <CoachingTimeTable/>
-            </PageContentItem>
+            <CoachingTimeTable/>
         </Container>
     );
 })

@@ -1,7 +1,7 @@
 import React, {FC, useContext} from 'react';
 import {ICustomerRequest} from "../../../model/customer/CustomerRequest";
 import {AppTable} from "../../UI/table/AppTable";
-import {Link, TableCell, Typography} from "@mui/material";
+import {Button, Link, TableCell, Typography} from "@mui/material";
 import {DateTimeUtils} from "../../../utils/DateTimeUtils";
 import AppTableRow from "../../UI/table/AppTableRow";
 import {Body, Caption} from "../../UI/typography/Typography";
@@ -25,7 +25,8 @@ const columns: string[] = [
     'Тренировка',
     'Текущий статус',
     'Доп инфо',
-    'Дата звонка'
+    'Дата звонка',
+    ''
 ]
 
 const TableRow: FC<TableRowProps> = observer(({request, handleClickTableRow}) => {
@@ -36,7 +37,6 @@ const TableRow: FC<TableRowProps> = observer(({request, handleClickTableRow}) =>
         <AppTableRow
             hover
             tabIndex={-1}
-            onClick={() => handleClickTableRow(request)}
         >
             <TableCell>
                 <Typography
@@ -55,7 +55,7 @@ const TableRow: FC<TableRowProps> = observer(({request, handleClickTableRow}) =>
                 <Body>
                     {request.person.info.telephone}
                 </Body>
-                <Caption>
+                <Body>
                     <Link
                         component={'a'}
                         href={request.person.info.pageLinkVk}
@@ -64,7 +64,17 @@ const TableRow: FC<TableRowProps> = observer(({request, handleClickTableRow}) =>
                     >
                         {request.person.info.pageLinkVk}
                     </Link>
-                </Caption>
+                </Body>
+                <Body>
+                    <Link
+                        component={'a'}
+                        href={`http://spartak-fitnes.ru/profile/${request.person.id}/orders`}
+                        target={'_blank'}
+                        color={'text.primary'}
+                    >
+                        {'\nИстория покупок'}
+                    </Link>
+                </Body>
             </TableCell>
             <TableCell>
                 <Body>
@@ -78,17 +88,13 @@ const TableRow: FC<TableRowProps> = observer(({request, handleClickTableRow}) =>
                 </Body>
             </TableCell>
             <TableCell>
-                <Body
-                    sx={{
-                        color: colorStore.getColorByEvent(request.currentStatus.value)
-                    }}
-                >
+                <Body sx={{
+                    color: colorStore.getColorByEvent(request.currentStatus.value)
+                }}>
                     {request.currentStatus.title}
                 </Body>
             </TableCell>
-            <TableCell
-                sx={{maxWidth: '200px'}}
-            >
+            <TableCell sx={{maxWidth: '200px'}}>
                 <Caption>
                     {request.info}
                 </Caption>
@@ -97,6 +103,11 @@ const TableRow: FC<TableRowProps> = observer(({request, handleClickTableRow}) =>
                 <Caption>
                     {DateTimeUtils.toDDmmYYYYmmHH(request.callDateTime)}
                 </Caption>
+            </TableCell>
+            <TableCell>
+                <Button onClick={() => handleClickTableRow(request)}>
+                    Редактировать
+                </Button>
             </TableCell>
         </AppTableRow>
     )
@@ -114,7 +125,7 @@ const CustomerRequestTable: FC<CustomerRequestTableProps> = observer(
                 columns={columns}
                 rows={requests}
                 isLoading={isLoading}
-                maxSkeletonRows={8}
+                maxSkeletonRows={9}
                 renderRow={request =>
                     <React.Fragment
                         key={`customerRequestRow_${request.id}`}

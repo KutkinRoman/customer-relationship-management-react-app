@@ -31,7 +31,6 @@ class AppNavItem implements IAppNavItem {
         return `/${this.indexPath}/${this.path}`;
     }
 
-
 }
 
 const publicNavItems: IAppNavItem[] = [
@@ -45,6 +44,7 @@ const CRMNavItems: IAppNavItem[] = [
     // new AppNavItem('Касса', null, AppPaths.cash, null),
     // new AppNavItem('Тренер', null, AppPaths.coach, null),
     // new AppNavItem('Товары', null, AppPaths.products, null),
+
     new AppNavItem('Заявки', null, AppPaths.customerRequests, AppPaths.indexCRM, [
             new AppNavItem('Список заявок', null, AppPaths.customerRequests, null, null),
             new AppNavItem('Новая заявка', null, AppPaths.newCustomerRequests, null, null)
@@ -52,14 +52,23 @@ const CRMNavItems: IAppNavItem[] = [
     ),
     new AppNavItem('График', null, AppPaths.timeTable, AppPaths.indexCRM, [
             new AppNavItem('График тренировок', null, AppPaths.coachingTimeTable, null, null),
+            new AppNavItem('График работы', null, AppPaths.employeeTimeTable, null, null),
         ]
     ),
     new AppNavItem('Беседы', null, AppPaths.conversations, AppPaths.indexCRM, null),
 ]
 
+const profileNavItems: IAppNavItem[] = []
+
+const profileCoachNavItems: IAppNavItem[] = [
+    new AppNavItem('Баланс', null, AppPaths.coachTransactions, AppPaths.indexProfile, null)
+]
+
 export {
     publicNavItems,
-    CRMNavItems
+    CRMNavItems,
+    profileNavItems,
+    profileCoachNavItems
 };
 
 export type {IAppNavItem};

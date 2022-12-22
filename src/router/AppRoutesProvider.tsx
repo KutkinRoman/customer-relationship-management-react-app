@@ -8,6 +8,7 @@ import {observer} from "mobx-react-lite";
 import {AuthContext} from "../context/AuthContext";
 import {UserRole} from "../model/user/UserRole";
 import LoadingPage from "../pages/public/LoadingPage";
+import ProfileWrapper from "../components/app-wrappers/ProfileWrapper";
 
 const AppRoutesProvider = observer(() => {
 
@@ -29,9 +30,22 @@ const AppRoutesProvider = observer(() => {
                         path={AppPaths.indexCRM + "/*"}
                         element={
                             authStore?.isAuth && authStore.user?.roles.includes(UserRole.MANAGER)
-                                ? <CRMWrapper/>
-                                : <LoginPage/>
-                        }/>
+                                ?
+                                <CRMWrapper/>
+                                :
+                                <LoginPage/>
+                        }
+                    />
+                    <Route
+                        path={AppPaths.indexProfile + "/*"}
+                        element={
+                            authStore?.isAuth && authStore.user?.roles.includes(UserRole.MANAGER)
+                                ?
+                                <ProfileWrapper/>
+                                :
+                                <LoginPage/>
+                        }
+                    />
                     <Route
                         path={AppPaths.index + "/*"}
                         element={<PublicWrapper/>}

@@ -34,13 +34,6 @@ const LoginForm: FC = () => {
         }
     }
 
-    useEffect(() => {
-        if (process.env.REACT_APP_PROFILE === 'development') {
-            loginForm.setValue('username', process.env.REACT_APP_DEV_USERNAME)
-            loginForm.setValue('password', process.env.REACT_APP_DEV_PASSWORD)
-        }
-    }, [])
-
     return (
         <form
             onSubmit={loginForm.handleSubmit(handleLogin)}
