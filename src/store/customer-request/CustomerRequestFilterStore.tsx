@@ -10,6 +10,7 @@ export class CustomerRequestFilterStore {
     createDateRange: DateRange<Date>
     planDateRange: DateRange<Date>
     callDateRange: DateRange<Date>
+    responseDateRange: DateRange<Date>
     events: CustomerRequestEventCheckBox[]
     isCheckedAll: boolean
     mode: 'list' | 'table';
@@ -19,9 +20,10 @@ export class CustomerRequestFilterStore {
         this.createDateRange = [null, null]
         this.planDateRange = [null, null]
         this.callDateRange = [null, null]
+        this.responseDateRange = [null, null]
         this.events = []
         this.isCheckedAll = true
-        this.mode = 'list'
+        this.mode = 'table'
         makeAutoObservable(this)
     }
 
@@ -41,6 +43,10 @@ export class CustomerRequestFilterStore {
         this.callDateRange = value;
     }
 
+    setResponseDateRange(value: DateRange<Date>) {
+        this.responseDateRange = value;
+    }
+
     setEvents(events: CustomerRequestEventCheckBox[]) {
         this.events = events
     }
@@ -55,6 +61,7 @@ export class CustomerRequestFilterStore {
         this.createDateRange = [null, null]
         this.planDateRange = [null, null]
         this.callDateRange = [null, null]
+        this.responseDateRange = [null, null]
         this.setIsCheckedAll(true)
     }
 
@@ -67,7 +74,9 @@ export class CustomerRequestFilterStore {
             startPlanDate: DateTimeUtils.toISODateString(this.planDateRange[0]),
             endPlanDate: DateTimeUtils.toISODateString(this.planDateRange[1]),
             startCallDate: DateTimeUtils.toISODateString(this.callDateRange[0]),
-            endCallDate: DateTimeUtils.toISODateString(this.callDateRange[1])
+            endCallDate: DateTimeUtils.toISODateString(this.callDateRange[1]),
+            startResponseDate: DateTimeUtils.toISODateString(this.responseDateRange[0]),
+            endResponseDate: DateTimeUtils.toISODateString(this.responseDateRange[1])
         }
     }
 

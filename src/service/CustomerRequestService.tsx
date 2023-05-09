@@ -41,4 +41,8 @@ export class CustomerRequestService {
     public static async saveCallDateTimeByCustomerRequestId(id: number | undefined, data: any) {
         return await AUTH_API.patch<ICustomerRequest>(`/api/v1/customers/requests/${id}/call`, data)
     }
+
+    public static async saveResponseKeyDateByCustomerRequestId(id: number | undefined, data: any) {
+        return await AUTH_API.patch<ICustomerRequest>(`/api/v1/customers/requests/${id}/response-date`, data)
+    }
 }
