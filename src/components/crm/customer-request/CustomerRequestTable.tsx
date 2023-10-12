@@ -26,6 +26,7 @@ const columns: string[] = [
     'Текущий статус',
     'Доп инфо',
     'Дата звонка',
+    'Контроль ответа',
     ''
 ]
 
@@ -102,6 +103,11 @@ const TableRow: FC<TableRowProps> = observer(({request, handleClickTableRow}) =>
             <TableCell>
                 <Caption>
                     {DateTimeUtils.toDDmmYYYYmmHH(request.callDateTime)}
+                </Caption>
+            </TableCell>
+            <TableCell>
+                <Caption>
+                    {DateTimeUtils.toDDmmYYYY(request.responseKeyDate)}
                 </Caption>
             </TableCell>
             <TableCell>

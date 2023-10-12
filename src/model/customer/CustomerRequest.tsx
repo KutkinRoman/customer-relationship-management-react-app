@@ -12,6 +12,7 @@ export interface ICustomerRequest {
     callDateTime?: Date;
     currentStatus: CustomerRequestEvent;
     createDateTime?: Date;
+    responseKeyDate?: Date
     info?: string;
     person: PersonFull;
     coach?: Coach;
@@ -28,6 +29,7 @@ export class CustomerRequest implements ICustomerRequest {
     callDateTime?: Date;
     currentStatus: CustomerRequestEvent;
     createDateTime?: Date;
+    responseKeyDate?: Date
     info?: string;
     person: PersonFull;
     coach?: Coach;
@@ -41,6 +43,7 @@ export class CustomerRequest implements ICustomerRequest {
         this.callDateTime = customerRequest.callDateTime;
         this.currentStatus = customerRequest.currentStatus;
         this.createDateTime = customerRequest.createDateTime;
+        this.responseKeyDate = customerRequest.responseKeyDate;
         this.info = customerRequest.info;
         this.person = new PersonFull(customerRequest.person)
         this.coach = customerRequest.coach;
@@ -57,6 +60,7 @@ export class CustomerRequest implements ICustomerRequest {
         this.coach = customerRequest.coach;
         this.coachingDirection = customerRequest.coachingDirection
         this.histories = customerRequest.histories;
+        this.responseKeyDate = customerRequest.responseKeyDate;
     }
 
 }

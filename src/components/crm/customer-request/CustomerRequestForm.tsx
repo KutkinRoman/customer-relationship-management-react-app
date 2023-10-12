@@ -26,6 +26,7 @@ import {CoachingContext} from "../../../context/CoachingContext";
 import {CoachContext} from "../../../context/CoachContext";
 import AppQuestionDialog from "../../UI/dialog/AppQuestionDialog";
 import useModal from "../../../hooks/useModal";
+import AppDatePickerController from "../../UI/form/AppDatePickerController";
 
 interface CustomerRequestFormProps {
     formStore: CustomerRequestFormStore
@@ -302,6 +303,65 @@ const RequestCall: FC<CustomerRequestFormProps> = ({formStore}) => {
     )
 }
 
+const ResponseKeyDate: FC<CustomerRequestFormProps> = ({formStore}) => {
+    const {
+        control,
+        formState: {
+            isDirty,
+            isValid,
+            errors
+        },
+        handleSubmit,
+        resetField,
+        setError,
+    } = useForm({mode: 'onChange'})
+
+    const {
+        onSubmit,
+        isLoading
+    } = useSubmitForm<ICustomerRequest>({
+        submitCallback: formData => {
+            formData.responseKeyDate = DateTimeUtils.toISODateTimeString(formData.responseKeyDate)
+            return CustomerRequestService.saveResponseKeyDateByCustomerRequestId(formStore.customerRequest?.id, formData)
+        },
+        success: responseData => formStore.customerRequest?.update(responseData),
+        setError
+    })
+
+    useEffect(() => {
+        resetField('responseKeyDate', {defaultValue: formStore.customerRequest?.responseKeyDate})
+    }, [formStore.customerRequest?.responseKeyDate])
+
+    return (
+        <form
+            onSubmit={handleSubmit(onSubmit)}
+        >
+            <PageContentItem>
+                <AppFormHeader
+                    text={'Контроль ответа'}
+                />
+                <AppFormItem>
+                    <AppDatePickerController
+                        name={'responseKeyDate'}
+                        control={control}
+                        errors={errors}
+                        label={'Контроль ответа'}
+                    />
+                </AppFormItem>
+                <AppFormAction>
+                    <AppLoadingButton
+                        loading={isLoading}
+                        submit={true}
+                        disabled={!isDirty || !isValid}
+                    >
+                        Сохранить
+                    </AppLoadingButton>
+                </AppFormAction>
+            </PageContentItem>
+        </form>
+    )
+}
+
 const RequestInfo: FC<CustomerRequestFormProps> = ({formStore}) => {
 
     const {
@@ -470,6 +530,7 @@ const CustomerRequestForm: FC<CustomerRequestFormProps> =
                 <PersonData formStore={formStore}/>
                 <RequestCoaching formStore={formStore}/>
                 <RequestCall formStore={formStore}/>
+                <ResponseKeyDate formStore={formStore}/>
                 <RequestInfo formStore={formStore}/>
                 <RequestHistory formStore={formStore}/>
             </React.Fragment>

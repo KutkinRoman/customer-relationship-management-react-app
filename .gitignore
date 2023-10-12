@@ -1,9 +1,4 @@
-/Dockerfile
-/.dockerignore
 /node_modules
 /.idea
-/nginx
-/docker-compose.prod.yml
-/docker-compose.yml
 /public/
 /build/

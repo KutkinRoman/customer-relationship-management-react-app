@@ -69,6 +69,11 @@ const CustomerRequestFilter: FC<CustomerRequestFilterProps> = observer(
                         value={filter.callDateRange}
                         setValue={newValue => filter.setCallDateRange(newValue)}
                     />
+                    <AppDateRangePickerSmall
+                        title={'Контроль ответа'}
+                        value={filter.responseDateRange}
+                        setValue={newValue => filter.setResponseDateRange(newValue)}
+                    />
                 </CustomerRequestFilterItem>
                 <AppDivider/>
                 <CustomerRequestFilterItem>
