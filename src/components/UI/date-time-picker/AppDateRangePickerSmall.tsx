@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
-import {DateRangePicker} from "@mui/x-date-pickers-pro/DateRangePicker";
 import {Box, TextField, Typography} from "@mui/material";
 import AppDateRangePicker from "./AppDateRangePicker";
+import {DateRange} from "@mui/lab";
 
 interface AppDateRangePickerSmallProps {
     title: string
