@@ -6,7 +6,6 @@ import {observer} from "mobx-react-lite";
 import AppDivider from "../../UI/divider/AppDivider";
 import AppButton from "../../UI/button/AppButton";
 import AppButtonGroup from "../../UI/button/AppButtonGroup";
-import AppDateRangePickerSmall from "../../UI/date-time-picker/AppDateRangePickerSmall";
 import CustomerRequestEventColorPicker from "./CustomerRequestEventColorPicker";
 import ViewListIcon from '@mui/icons-material/ViewList';
 import TableChartIcon from '@mui/icons-material/TableChart';
@@ -53,28 +52,6 @@ const CustomerRequestFilter: FC<CustomerRequestFilterProps> = observer(
                 display={'flex'}
                 flexDirection={'column'}
             >
-                <CustomerRequestFilterItem>
-                    <AppDateRangePickerSmall
-                        title={'Дата заявки'}
-                        value={filter.createDateRange}
-                        setValue={newValue => filter.setCreateDateRange(newValue)}
-                    />
-                    <AppDateRangePickerSmall
-                        title={'Дата тренировки'}
-                        value={filter.planDateRange}
-                        setValue={newValue => filter.setPlanDateRange(newValue)}
-                    />
-                    <AppDateRangePickerSmall
-                        title={'Дата звонка'}
-                        value={filter.callDateRange}
-                        setValue={newValue => filter.setCallDateRange(newValue)}
-                    />
-                    <AppDateRangePickerSmall
-                        title={'Контроль ответа'}
-                        value={filter.responseDateRange}
-                        setValue={newValue => filter.setResponseDateRange(newValue)}
-                    />
-                </CustomerRequestFilterItem>
                 <AppDivider/>
                 <CustomerRequestFilterItem>
                     {filter.events.map(event =>
